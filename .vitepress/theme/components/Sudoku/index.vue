@@ -11,26 +11,17 @@ const game = useGame()
 const showModal = ref(false)
 const errorCell = ref(null)
 
-// 填入数字或候选数
-const fillNumber = (n, isCandidateMode) => {
-  if (isCandidateMode) {
-    // 候选数模式
-    game.toggleCandidate(n)
-  } else {
-    // 确定数模式
-    const success = game.fill(n)
-    if (!success && game.selected.value) {
-      // 填错时，给当前单元格添加错误效果
-      errorCell.value = { ...game.selected.value }
-      setTimeout(() => errorCell.value = null, 400)
-    }
+const fillNumber = (n, isPencil) => {
+  if (isPencil) return game.toggleCandidate(n)
+  if (!game.fill(n) && game.selected.value) {
+    errorCell.value = { ...game.selected.value }
+    setTimeout(() => errorCell.value = null, 400)
   }
 }
 
-// 键盘事件
 const onKey = e => {
   if (game.status.value !== 'playing') return
-  if (e.key >= '1' && e.key <= '9') fillNumber(+e.key)
+  if (e.key >= '1' && e.key <= '9') fillNumber(+e.key, false)
   else if (game.selected.value) {
     const { r, c } = game.selected.value
     if (e.key === 'ArrowUp') game.select(Math.max(0, r - 1), c)
@@ -40,32 +31,16 @@ const onKey = e => {
   }
 }
 
-onMounted(() => {
-  game.init()
-  window.addEventListener('keydown', onKey)
-})
-
+onMounted(() => { game.init(); window.addEventListener('keydown', onKey) })
 onUnmounted(() => window.removeEventListener('keydown', onKey))
 
-// 监听游戏状态
 watch(() => game.status.value, s => {
-  if (s === 'won' || s === 'lost') {
-    showModal.value = true
-    emit(s)
-  }
+  if (s === 'won' || s === 'lost') { showModal.value = true; emit(s) }
 })
 
-// 模态框关闭
-const onModalClose = () => {
-  showModal.value = false
-  game.init()
-}
+const onModalClose = () => { showModal.value = false; game.init() }
 
-defineExpose({
-  init: game.init,
-  hint: game.hint,
-  getStatus: () => game.status.value
-})
+defineExpose({ init: game.init, hint: game.hint, getStatus: () => game.status.value })
 </script>
 
 <template>
@@ -79,7 +54,6 @@ defineExpose({
         @hint="game.hint()"
         @restart="game.init(); emit('restart')"
       />
-
       <SudokuBoard
         :board="game.board.value"
         :initial="game.initial.value"
@@ -89,14 +63,12 @@ defineExpose({
         :candidates="game.candidates.value"
         @select="({ r, c }) => game.select(r, c)"
       />
-
       <NumberKeyboard
         :counts="game.numberCounts.value"
         :disabled="game.status.value !== 'playing'"
         @input="fillNumber"
       />
     </div>
-
     <GameModal
       :show="showModal"
       :type="game.status.value === 'won' ? 'win' : 'lose'"

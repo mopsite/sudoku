@@ -11,20 +11,14 @@ const emit = defineEmits(['hint', 'restart'])
 
 <template>
   <div class="bar">
-    <button
-      class="btn"
-      :disabled="hints >= maxHints || status !== 'playing'"
-      @click="emit('hint')"
-    >
+    <button class="btn" :disabled="hints >= maxHints || status !== 'playing'" @click="emit('hint')">
       💡
       <span v-if="maxHints - hints > 0" class="badge">{{ maxHints - hints }}</span>
     </button>
-
     <button class="btn">
       ❌
       <span class="badge error">{{ errors }}</span>
     </button>
-
     <button class="btn" @click="emit('restart')">🔄</button>
   </div>
 </template>
