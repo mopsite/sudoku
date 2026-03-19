@@ -1,0 +1,91 @@
+import { defineConfig } from 'vitepress'
+
+const baseURL = process.env.BASE_URL || '/sudoku/'
+
+// https://vitepress.dev/reference/site-config
+export default defineConfig({
+  base: baseURL,
+  title: '数独',
+  description: '一款非常受欢迎的数字逻辑谜题',
+  head: [['link', { rel: 'icon', href: `${baseURL}logo.png` }]],
+  cleanUrls: true,
+  ignoreDeadLinks: true,
+  themeConfig: {
+    // https://vitepress.dev/reference/default-theme-config
+    logo: '/logo.png',
+
+    aside: false,
+    outline: { label: '本页目录', level: [2, 3] },
+    sidebarMenuLabel: '菜单',
+    returnToTopLabel: '返回顶部',
+    darkModeSwitchLabel: '外观',
+    lightModeSwitchTitle: '切换到浅色模式',
+    darkModeSwitchTitle: '切换到深色模式',
+    docFooter: { prev: '上一篇', next: '下一篇' },
+    search: localSearch(),
+
+    nav: [...items(), { text: '演练场', link: '/playground' }],
+    sidebar: items(),
+
+    socialLinks: [{ icon: 'github', link: 'https://github.com/mopsite/sudoku' }]
+  }
+})
+
+function items() {
+  return [
+    {
+      text: '基础解法',
+      items: [
+        { text: '前言', link: '/basic/starting' },
+        { text: '唯一数', link: '/basic/last-value' },
+        { text: '宫摒除', link: '/basic/hidden-single-in-box' },
+        { text: '行列摒除', link: '/basic/hidden-single-in-line' },
+        { text: '唯一余数', link: '/basic/naked-single' }
+      ]
+    },
+    {
+      text: '进阶解法',
+      items: [
+        { text: '区块摒除', link: '/advanced/locked-candidates' },
+        { text: '数对法', link: '/advanced/pairs' },
+        { text: '三/四链数', link: '/advanced/triplet-quad' },
+        { text: '链的逻辑', link: '/advanced/chain' },
+        { text: '四角对角线', link: '/advanced/x-wing' },
+        { text: '摩天楼', link: '/advanced/skyscraper' },
+        { text: '双线风筝', link: '/advanced/two-strings-kite' },
+        { text: '多宝鱼', link: '/advanced/turbot-fish' },
+        { text: '三/四链列', link: '/advanced/swordfish-jellyfish' },
+        { text: 'X 环/链', link: '/advanced/xcycle-xchain' },
+        { text: 'XY-Wing/Chain', link: '/advanced/xywing-xychain' }
+      ]
+    }
+  ]
+}
+
+function localSearch() {
+  return {
+    provider: 'local',
+    options: {
+      locales: {
+        root: {
+          translations: {
+            button: {
+              buttonText: '搜索文档',
+              buttonAriaLabel: '搜索文档'
+            },
+            modal: {
+              noResultsText: '无法找到相关结果',
+              resetButtonTitle: '清除查询条件',
+              displayDetails: '显示详细列表',
+              footer: {
+                selectText: '选择',
+                navigateText: '切换',
+                closeText: '关闭'
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
