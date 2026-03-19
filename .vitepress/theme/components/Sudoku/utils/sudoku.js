@@ -3,7 +3,7 @@
  */
 
 // 难度配置：移除的格子数
-const DIFFICULTY = { easy: 30, medium: 40, hard: 50, expert: 55 }
+const DIFFICULTY = { easy: 25, medium: 35, hard: 45, expert: 55 }
 
 // Fisher-Yates 洗牌
 const shuffle = arr => {
@@ -146,6 +146,25 @@ export const countNumbers = board => {
     }
   }
   return counts
+}
+
+// 从字符串解析题目（81个字符，0或.表示空格）
+export const parsePuzzle = str => {
+  if (!str || str.length !== 81) return null
+  const board = createBoard()
+  for (let i = 0; i < 81; i++) {
+    const ch = str[i]
+    const n = ch === '.' || ch === '0' ? 0 : parseInt(ch, 10)
+    if (isNaN(n) || n < 0 || n > 9) return null
+    board[(i / 9) | 0][i % 9] = n
+  }
+  return board
+}
+
+// 验证题目是否有解
+export const hasSolution = board => {
+  const copy = copyBoard(board)
+  return solve(copy)
 }
 
 export { isValid }

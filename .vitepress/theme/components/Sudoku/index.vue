@@ -4,17 +4,26 @@ import SudokuBoard from './cpns/SudokuBoard.vue'
 import NumberKeyboard from './cpns/NumberKeyboard.vue'
 import ControlBar from './cpns/ControlBar.vue'
 import GameModal from './cpns/GameModal.vue'
+import CustomModal from './cpns/CustomModal.vue'
 import { useGame } from './composables/useGame.js'
+import { parsePuzzle, hasSolution } from './utils/sudoku.js'
 
 const emit = defineEmits(['win', 'lose', 'restart'])
 const game = useGame()
 const showModal = ref(false)
+const showCustomModal = ref(false)
 const errorCell = ref(null)
+const difficulty = ref('medium')
+const lastNonCustom = ref('medium')
 
 const fillNumber = (n, isPencil) => {
   if (isPencil) return game.toggleCandidate(n)
-  if (!game.fill(n) && game.selected.value) {
-    errorCell.value = { ...game.selected.value }
+  const selected = game.selected.value
+  if (!selected) return
+  // 如果当前格已有确定数，不显示视觉反馈
+  if (game.board.value[selected.r][selected.c] !== 0) return
+  if (!game.fill(n)) {
+    errorCell.value = { ...selected }
     setTimeout(() => errorCell.value = null, 400)
   }
 }
@@ -38,7 +47,39 @@ watch(() => game.status.value, s => {
   if (s === 'won' || s === 'lost') { showModal.value = true; emit(s) }
 })
 
-const onModalClose = () => { showModal.value = false; game.init() }
+const onModalClose = () => {
+  showModal.value = false
+  if (game.isCustom.value && game.status.value === 'won') {
+    showCustomModal.value = true
+  } else {
+    game.init(difficulty.value === 'custom' ? lastNonCustom.value : difficulty.value)
+  }
+}
+
+const onChangeDifficulty = diff => {
+  if (diff === 'custom') {
+    lastNonCustom.value = difficulty.value === 'custom' ? lastNonCustom.value : difficulty.value
+    difficulty.value = 'custom'
+    showCustomModal.value = true
+  } else {
+    difficulty.value = diff
+    game.init(diff)
+  }
+}
+
+const onCustomConfirm = str => {
+  const puzzle = parsePuzzle(str)
+  if (!puzzle || !hasSolution(puzzle)) return alert('无效的题目或无解')
+  showCustomModal.value = false
+  difficulty.value = 'custom'
+  game.init('custom', puzzle)
+}
+
+const onCustomCancel = () => {
+  showCustomModal.value = false
+  difficulty.value = lastNonCustom.value
+  game.init(lastNonCustom.value)
+}
 
 defineExpose({ init: game.init, hint: game.hint, getStatus: () => game.status.value })
 </script>
@@ -51,8 +92,10 @@ defineExpose({ init: game.init, hint: game.hint, getStatus: () => game.status.va
         :max-hints="game.maxHints"
         :errors="game.errors.value"
         :status="game.status.value"
+        :difficulty="difficulty"
         @hint="game.hint()"
-        @restart="game.init(); emit('restart')"
+        @restart="game.init(difficulty === 'custom' ? lastNonCustom : difficulty); emit('restart')"
+        @change-difficulty="onChangeDifficulty"
       />
       <SudokuBoard
         :board="game.board.value"
@@ -76,6 +119,11 @@ defineExpose({ init: game.init, hint: game.hint, getStatus: () => game.status.va
       :message="game.status.value === 'won' ? '你成功解开了这道数独!' : '错误次数已达上限!'"
       btn-text="继续"
       @close="onModalClose"
+    />
+    <CustomModal
+      :show="showCustomModal"
+      @confirm="onCustomConfirm"
+      @cancel="onCustomCancel"
     />
   </div>
 </template>

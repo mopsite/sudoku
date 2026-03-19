@@ -1,16 +1,37 @@
 <script setup>
-defineProps({
+import { computed } from 'vue'
+
+const props = defineProps({
   hints: { type: Number, default: 0 },
   maxHints: { type: Number, default: 3 },
   errors: { type: Number, default: 0 },
-  status: { type: String, default: 'playing' }
+  status: { type: String, default: 'playing' },
+  difficulty: { type: String, default: 'medium' }
 })
 
-const emit = defineEmits(['hint', 'restart'])
+const emit = defineEmits(['hint', 'restart', 'changeDifficulty'])
+
+const options = [
+  { value: 'easy', label: '简单' },
+  { value: 'medium', label: '中等' },
+  { value: 'hard', label: '困难' },
+  { value: 'expert', label: '专家' },
+  { value: 'custom', label: '自定义' }
+]
+
+const selectValue = computed({
+  get: () => props.difficulty,
+  set: (val) => emit('changeDifficulty', val)
+})
 </script>
 
 <template>
   <div class="bar">
+    <select class="select" v-model="selectValue">
+      <option v-for="opt in options" :key="opt.value" :value="opt.value">
+        {{ opt.label }}
+      </option>
+    </select>
     <button class="btn" :disabled="hints >= maxHints || status !== 'playing'" @click="emit('hint')">
       💡
       <span v-if="maxHints - hints > 0" class="badge">{{ maxHints - hints }}</span>
@@ -31,6 +52,20 @@ const emit = defineEmits(['hint', 'restart'])
   justify-content: center;
   flex-wrap: wrap;
 }
+
+.select {
+  padding: 8px 12px;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 8px;
+  background: var(--vp-c-bg);
+  color: var(--vp-c-text-1);
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.select:hover { border-color: var(--vp-c-brand-1); }
+.select:focus { outline: none; border-color: var(--vp-c-brand-1); }
 
 .btn {
   width: 48px;
@@ -69,6 +104,7 @@ const emit = defineEmits(['hint', 'restart'])
 
 @media (max-width: 768px) {
   .bar { gap: 8px; }
+  .select { padding: 6px 10px; font-size: 13px; }
   .btn { width: 40px; height: 40px; font-size: 18px; }
   .badge { min-width: 18px; height: 18px; font-size: 10px; }
 }

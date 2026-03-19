@@ -1,5 +1,5 @@
 import { ref, computed, shallowRef } from 'vue'
-import { generatePuzzle, isComplete, countNumbers } from '../utils/sudoku.js'
+import { generatePuzzle, isComplete, countNumbers, solveSudoku } from '../utils/sudoku.js'
 
 const MAX_ERRORS = 3
 const MAX_HINTS = 3
@@ -14,11 +14,23 @@ export function useGame() {
   const hints = ref(0)
   const locked = shallowRef(new Set())
   const candidates = shallowRef([])
+  const difficulty = ref('medium')
+  const isCustom = ref(false)
 
   const numberCounts = computed(() => countNumbers(board.value))
 
-  const init = () => {
-    const { puzzle, solution: sol } = generatePuzzle('medium')
+  const init = (diff = 'medium', customPuzzle = null) => {
+    let puzzle, sol
+    if (customPuzzle) {
+      puzzle = customPuzzle
+      sol = solveSudoku(puzzle)
+      isCustom.value = true
+    } else {
+      const result = generatePuzzle(diff)
+      puzzle = result.puzzle
+      sol = result.solution
+      isCustom.value = false
+    }
     board.value = puzzle
     solution.value = sol
     initial.value = puzzle.map(r => r.slice())
@@ -27,6 +39,7 @@ export function useGame() {
     errors.value = 0
     hints.value = 0
     locked.value = new Set()
+    difficulty.value = diff
     candidates.value = Array.from({ length: 9 }, () =>
       Array.from({ length: 9 }, () => new Set())
     )
@@ -107,7 +120,7 @@ export function useGame() {
 
   return {
     board, solution, initial, selected, status, errors, hints, locked, candidates,
-    numberCounts, maxErrors: MAX_ERRORS, maxHints: MAX_HINTS,
+    difficulty, isCustom, numberCounts, maxErrors: MAX_ERRORS, maxHints: MAX_HINTS,
     init, select, fill, hint, toggleCandidate
   }
 }
