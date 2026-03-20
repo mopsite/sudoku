@@ -8,13 +8,23 @@ const THEME_CONFIG = {
   dataAttribute: 'data-sudoku-theme'
 }
 
+// 检查是否在浏览器环境
+function isBrowser() {
+  return typeof window !== 'undefined' && typeof localStorage !== 'undefined'
+}
+
+// 获取存储的主题
+function getStoredTheme() {
+  if (!isBrowser()) return THEME_CONFIG.defaultTheme
+  return localStorage.getItem(THEME_CONFIG.storageKey) || THEME_CONFIG.defaultTheme
+}
+
 // 主题状态（模块级单例）
-const currentTheme = ref(
-  localStorage.getItem(THEME_CONFIG.storageKey) || THEME_CONFIG.defaultTheme
-)
+const currentTheme = ref(getStoredTheme())
 
 // 初始化主题属性
 function initTheme() {
+  if (!isBrowser()) return
   document.documentElement.setAttribute(
     THEME_CONFIG.dataAttribute,
     currentTheme.value
@@ -31,11 +41,13 @@ function toggleTheme() {
 
 // 保存主题到本地存储
 function saveTheme(theme) {
+  if (!isBrowser()) return
   localStorage.setItem(THEME_CONFIG.storageKey, theme)
 }
 
 // 更新 DOM 属性
 function updateDOMAttribute(theme) {
+  if (!isBrowser()) return
   document.documentElement.setAttribute(THEME_CONFIG.dataAttribute, theme)
 }
 
