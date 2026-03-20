@@ -1,0 +1,76 @@
+/* ============================================
+   数独主题样式 - 玻璃主题 & 木质主题
+   ============================================ */
+
+/* ========== 亮色模式 ========== */
+:root {
+  /* 玻璃主题 - 紫红色系 */
+  --glass-bg: rgba(235, 220, 235, 0.55);
+  --glass-bg-hover: rgba(230, 210, 230, 0.68);
+  --glass-bg-active: rgba(225, 200, 225, 0.78);
+  --glass-border: rgba(200, 150, 195, 0.6);
+  --glass-shadow: 0 6px 24px rgba(120, 60, 120, 0.2), 0 3px 10px rgba(120, 60, 120, 0.15);
+  --glass-shadow-lg: 0 12px 40px rgba(120, 60, 120, 0.28), 0 6px 20px rgba(120, 60, 120, 0.18);
+  --glass-blur: 20px;
+  --glass-highlight: inset 0 3px 0 rgba(255, 255, 255, 0.95), inset 0 -3px 6px rgba(120, 60, 120, 0.12), inset 3px 0 0 rgba(255, 255, 255, 0.7), inset -1px 0 0 rgba(255, 255, 255, 0.3);
+  --glass-text: rgba(60, 30, 60, 0.95);
+  --glass-text-soft: rgba(80, 50, 80, 0.72);
+  --glass-accent: rgba(170, 80, 160, 1);
+  --glass-accent-soft: rgba(170, 80, 160, 0.25);
+  --glass-danger: rgba(200, 70, 100, 1);
+  --glass-danger-soft: rgba(200, 70, 100, 0.25);
+  --glass-success: rgba(100, 170, 140, 1);
+
+  /* 木质主题 - 复古木质 */
+  --wood-bg: linear-gradient(135deg, #d4a574 0%, #c4956a 50%, #b8865e 100%);
+  --wood-bg-light: linear-gradient(135deg, #e8c9a0 0%, #d4b08a 50%, #c9a078 100%);
+  --wood-bg-dark: linear-gradient(135deg, #8b6914 0%, #7a5a0f 50%, #6b4d0a 100%);
+  --wood-cell: linear-gradient(145deg, #f5e6d3 0%, #e8d4bc 100%);
+  --wood-cell-hover: linear-gradient(145deg, #fff8f0 0%, #f5e6d3 100%);
+  --wood-border: rgba(139, 90, 43, 0.4);
+  --wood-shadow: 0 6px 16px rgba(101, 67, 33, 0.35), inset 0 2px 0 rgba(255, 255, 255, 0.4), inset 0 -2px 4px rgba(101, 67, 33, 0.15);
+  --wood-shadow-lg: 0 16px 40px rgba(101, 67, 33, 0.45), inset 0 3px 0 rgba(255, 255, 255, 0.3), inset 0 -3px 6px rgba(101, 67, 33, 0.2);
+  --wood-text: rgba(60, 40, 20, 1);
+  --wood-text-soft: rgba(80, 55, 30, 0.7);
+  --wood-accent: rgba(139, 90, 43, 1);
+  --wood-accent-soft: rgba(139, 90, 43, 0.2);
+  --wood-danger: rgba(180, 60, 30, 1);
+  --wood-danger-soft: rgba(180, 60, 30, 0.15);
+  --wood-success: rgba(80, 140, 60, 1);
+}
+
+/* ========== 暗色模式 ========== */
+.dark {
+  /* 玻璃主题 - 暗色紫红 */
+  --glass-bg: rgba(40, 25, 40, 0.65);
+  --glass-bg-hover: rgba(60, 40, 60, 0.75);
+  --glass-bg-active: rgba(80, 55, 80, 0.85);
+  --glass-border: rgba(200, 130, 190, 0.4);
+  --glass-shadow: 0 6px 24px rgba(80, 30, 80, 0.45), 0 3px 10px rgba(80, 30, 80, 0.3);
+  --glass-shadow-lg: 0 12px 40px rgba(80, 30, 80, 0.55), 0 6px 20px rgba(80, 30, 80, 0.35);
+  --glass-highlight: inset 0 3px 0 rgba(220, 150, 210, 0.3), inset 0 -3px 6px rgba(0, 0, 0, 0.2), inset 3px 0 0 rgba(220, 150, 210, 0.2);
+  --glass-text: rgba(250, 230, 250, 0.95);
+  --glass-text-soft: rgba(235, 210, 235, 0.65);
+  --glass-accent: rgba(220, 120, 200, 1);
+  --glass-accent-soft: rgba(220, 120, 200, 0.25);
+  --glass-danger: rgba(255, 100, 130, 1);
+  --glass-danger-soft: rgba(255, 100, 130, 0.25);
+  --glass-success: rgba(120, 200, 170, 1);
+
+  /* 木质主题 - 暗色木质 */
+  --wood-bg: linear-gradient(135deg, #5a4a3a 0%, #4a3c2e 50%, #3a2e22 100%);
+  --wood-bg-light: linear-gradient(135deg, #6a5a4a 0%, #5a4a3a 50%, #4a3c2e 100%);
+  --wood-bg-dark: linear-gradient(135deg, #3a2e22 0%, #2a2218 50%, #1a160e 100%);
+  --wood-cell: linear-gradient(145deg, #7a6854 0%, #6a5844 100%);
+  --wood-cell-hover: linear-gradient(145deg, #8a7864 0%, #7a6854 100%);
+  --wood-border: rgba(140, 100, 60, 0.45);
+  --wood-shadow: 0 6px 16px rgba(35, 25, 15, 0.45), inset 0 2px 0 rgba(255, 245, 230, 0.15), inset 0 -2px 4px rgba(35, 25, 15, 0.3);
+  --wood-shadow-lg: 0 16px 40px rgba(35, 25, 15, 0.55), inset 0 3px 0 rgba(255, 245, 230, 0.1), inset 0 -3px 6px rgba(35, 25, 15, 0.35);
+  --wood-text: rgba(255, 245, 230, 1);
+  --wood-text-soft: rgba(240, 225, 200, 0.8);
+  --wood-accent: rgba(180, 130, 70, 1);
+  --wood-accent-soft: rgba(180, 130, 70, 0.28);
+  --wood-danger: rgba(200, 85, 65, 1);
+  --wood-danger-soft: rgba(200, 85, 65, 0.22);
+  --wood-success: rgba(85, 165, 70, 1);
+}

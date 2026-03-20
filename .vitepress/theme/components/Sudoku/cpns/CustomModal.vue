@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 
-const props = defineProps({ show: Boolean })
+const props = defineProps({ show: Boolean, theme: { type: String, default: 'glass' } })
 const emit = defineEmits(['confirm', 'cancel'])
 
 const input = ref('')
@@ -9,14 +9,8 @@ const error = ref('')
 
 const handleConfirm = () => {
   const str = input.value.trim()
-  if (str.length !== 81) {
-    error.value = '请输入81个数字字符'
-    return
-  }
-  if (!/^[0-9.]+$/.test(str)) {
-    error.value = '只能包含数字0-9或点号'
-    return
-  }
+  if (str.length !== 81) { error.value = '请输入81个数字字符'; return }
+  if (!/^[0-9.]+$/.test(str)) { error.value = '只能包含数字0-9或点号'; return }
   emit('confirm', str)
   input.value = ''
   error.value = ''
@@ -31,10 +25,10 @@ const handleCancel = () => {
 
 <template>
   <Teleport to="body">
-    <div v-if="show" class="overlay" @click.self="handleCancel">
+    <div v-if="show" class="overlay" :class="`theme-${theme}`" @click.self="handleCancel">
       <div class="modal">
         <h3>自定义题目</h3>
-        <p class="tip">请输入81个数字字符（0或.表示空格）</p>
+        <p class="tip">请输入81个数字字符（0表示空格）</p>
         <textarea
           v-model="input"
           placeholder="例如：530070000600195000098000060800060003400803001700020006060000280000419005000080079"
@@ -54,8 +48,6 @@ const handleCancel = () => {
 .overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(4px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -63,80 +55,101 @@ const handleCancel = () => {
 }
 
 .modal {
-  background: var(--vp-c-bg);
-  padding: 24px;
-  border-radius: 12px;
+  padding: 28px;
+  border-radius: 20px;
   width: 90%;
   max-width: 400px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
 
 h3 {
   margin: 0 0 8px;
   font-size: 1.25rem;
   font-weight: 600;
-  color: var(--vp-c-text-1);
 }
 
 .tip {
-  margin: 0 0 12px;
+  margin: 0 0 14px;
   font-size: 0.875rem;
-  color: var(--vp-c-text-2);
 }
 
 textarea {
   width: 100%;
-  padding: 12px;
-  border: 1px solid var(--vp-c-divider);
-  border-radius: 8px;
+  padding: 14px;
+  border-radius: 12px;
   font-size: 0.875rem;
   font-family: monospace;
   resize: none;
-  background: var(--vp-c-bg-soft);
-  color: var(--vp-c-text-1);
   box-sizing: border-box;
-}
-
-textarea:focus {
-  outline: none;
-  border-color: var(--vp-c-brand-1);
+  transition: all 0.2s ease;
 }
 
 .error {
-  margin: 8px 0 0;
+  margin: 10px 0 0;
   font-size: 0.8rem;
-  color: var(--vp-c-danger-1);
 }
 
 .btns {
   display: flex;
   gap: 12px;
-  margin-top: 16px;
+  margin-top: 18px;
 }
 
 .btn {
   flex: 1;
-  padding: 10px 16px;
+  padding: 12px 18px;
   border: none;
-  border-radius: 8px;
+  border-radius: 12px;
   font-size: 0.9rem;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.15s;
+  transition: all 0.2s ease;
 }
 
-.cancel {
-  background: var(--vp-c-bg-soft);
-  color: var(--vp-c-text-1);
-  border: 1px solid var(--vp-c-divider);
+/* ========== 玻璃主题 ========== */
+.overlay.theme-glass {
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 }
 
-.cancel:hover { background: var(--vp-c-bg-alt); }
-
-.confirm {
-  background: var(--vp-c-brand-1);
-  color: var(--vp-c-white);
+.overlay.theme-glass .modal {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  box-shadow: var(--glass-shadow-lg), var(--glass-highlight);
+  border: 1px solid var(--glass-border);
 }
 
-.confirm:hover { opacity: 0.9; }
+.overlay.theme-glass h3 { color: var(--glass-text); }
+.overlay.theme-glass .tip { color: var(--glass-text-soft); }
+.overlay.theme-glass textarea { background: rgba(255, 255, 255, 0.3); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border: 1px solid var(--glass-border); color: var(--glass-text); box-shadow: var(--glass-highlight); }
+.overlay.theme-glass textarea:focus { outline: none; border-color: var(--glass-accent); }
+.overlay.theme-glass .error { color: var(--glass-danger); }
+.overlay.theme-glass .cancel { background: var(--glass-bg); color: var(--glass-text); border: 1px solid var(--glass-border); box-shadow: var(--glass-highlight); }
+.overlay.theme-glass .cancel:hover { background: var(--glass-bg-hover); }
+.overlay.theme-glass .confirm { background: var(--glass-accent); color: #fff; }
+.overlay.theme-glass .confirm:hover { transform: scale(1.02); }
+
+/* ========== 木质主题 ========== */
+.overlay.theme-wood {
+  background: rgba(60, 40, 20, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.overlay.theme-wood .modal {
+  background: var(--wood-cell);
+  box-shadow: 0 12px 32px rgba(101, 67, 33, 0.35);
+  border: 2px solid var(--wood-border);
+}
+
+.overlay.theme-wood h3 { color: var(--wood-text); }
+.overlay.theme-wood .tip { color: var(--wood-text-soft); }
+.overlay.theme-wood textarea { background: var(--wood-cell); border: 1px solid var(--wood-border); color: var(--wood-text); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3); }
+.overlay.theme-wood textarea:focus { outline: none; border-color: var(--wood-accent); }
+.overlay.theme-wood .error { color: var(--wood-danger); }
+.overlay.theme-wood .cancel { background: var(--wood-cell); color: var(--wood-text); border: 1px solid var(--wood-border); }
+.overlay.theme-wood .cancel:hover { background: var(--wood-cell-hover); }
+.overlay.theme-wood .confirm { background: var(--wood-accent); color: #fff; }
+.overlay.theme-wood .confirm:hover { transform: scale(1.02); }
 </style>

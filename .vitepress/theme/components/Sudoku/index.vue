@@ -6,10 +6,13 @@ import ControlBar from './cpns/ControlBar.vue'
 import GameModal from './cpns/GameModal.vue'
 import CustomModal from './cpns/CustomModal.vue'
 import { useGame } from './composables/useGame.js'
+import { useTheme } from './composables/useTheme.js'
 import { parsePuzzle, hasSolution } from './utils/sudoku.js'
+import './styles/themes.css'
 
 const emit = defineEmits(['win', 'lose', 'restart'])
 const game = useGame()
+const { theme, toggle: toggleTheme } = useTheme()
 const showModal = ref(false)
 const showCustomModal = ref(false)
 const errorCell = ref(null)
@@ -20,7 +23,6 @@ const fillNumber = (n, isPencil) => {
   if (isPencil) return game.toggleCandidate(n)
   const selected = game.selected.value
   if (!selected) return
-  // 如果当前格已有确定数，不显示视觉反馈
   if (game.board.value[selected.r][selected.c] !== 0) return
   if (!game.fill(n)) {
     errorCell.value = { ...selected }
@@ -93,9 +95,11 @@ defineExpose({ init: game.init, hint: game.hint, getStatus: () => game.status.va
         :errors="game.errors.value"
         :status="game.status.value"
         :difficulty="difficulty"
+        :theme="theme"
         @hint="game.hint()"
         @restart="game.init(difficulty === 'custom' ? lastNonCustom : difficulty); emit('restart')"
         @change-difficulty="onChangeDifficulty"
+        @toggle-theme="toggleTheme"
       />
       <SudokuBoard
         :board="game.board.value"
@@ -104,11 +108,13 @@ defineExpose({ init: game.init, hint: game.hint, getStatus: () => game.status.va
         :locked="game.locked.value"
         :error-cell="errorCell"
         :candidates="game.candidates.value"
+        :theme="theme"
         @select="({ r, c }) => game.select(r, c)"
       />
       <NumberKeyboard
         :counts="game.numberCounts.value"
         :disabled="game.status.value !== 'playing'"
+        :theme="theme"
         @input="fillNumber"
       />
     </div>
@@ -118,10 +124,12 @@ defineExpose({ init: game.init, hint: game.hint, getStatus: () => game.status.va
       :title="game.status.value === 'won' ? '恭喜完成!' : '游戏结束'"
       :message="game.status.value === 'won' ? '你成功解开了这道数独!' : '错误次数已达上限!'"
       btn-text="继续"
+      :theme="theme"
       @close="onModalClose"
     />
     <CustomModal
       :show="showCustomModal"
+      :theme="theme"
       @confirm="onCustomConfirm"
       @cancel="onCustomCancel"
     />
@@ -133,7 +141,7 @@ defineExpose({ init: game.init, hint: game.hint, getStatus: () => game.status.va
   width: 100%;
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  margin: 20px 0;
   padding: 0 16px;
   box-sizing: border-box;
 }
