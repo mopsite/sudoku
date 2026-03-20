@@ -73,7 +73,7 @@ const selectValue = computed({
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: background 0.15s ease, border-color 0.15s ease;
   text-align: center;
   text-align-last: center;
 }
@@ -84,7 +84,7 @@ const selectValue = computed({
   border-radius: 12px;
   cursor: pointer;
   position: relative;
-  transition: all 0.2s ease;
+  transition: transform 0.15s ease, background 0.15s ease;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -93,7 +93,7 @@ const selectValue = computed({
 .btn svg {
   width: 24px;
   height: 24px;
-  transition: all 0.2s ease;
+  transition: transform 0.15s ease, stroke 0.15s ease;
 }
 
 .btn:disabled { opacity: 0.3; cursor: not-allowed; }
@@ -133,43 +133,43 @@ const selectValue = computed({
 
 .bar.theme-glass .select {
   background: var(--glass-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(200, 155, 200, 0.55);
+  backdrop-filter: blur(var(--glass-cell-blur));
+  -webkit-backdrop-filter: blur(var(--glass-cell-blur));
+  border: 1px solid var(--glass-cell-border);
   color: var(--glass-text);
-  box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.8), inset 0 -2px 3px rgba(120, 60, 120, 0.1), 0 3px 6px rgba(120, 60, 120, 0.12);
+  box-shadow: var(--glass-cell-shadow);
 }
 
-.bar.theme-glass .select:hover { background: var(--glass-bg-hover); border-color: rgba(170, 80, 160, 0.7); }
-.bar.theme-glass .select:focus { outline: none; border-color: rgba(170, 80, 160, 0.9); }
+.bar.theme-glass .select:hover { background: var(--glass-bg-hover); border-color: var(--glass-sel-num-border); }
+.bar.theme-glass .select:focus { outline: none; border-color: var(--glass-accent); }
 
 .bar.theme-glass .btn {
   background: var(--glass-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(200, 155, 200, 0.55);
-  box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.8), inset 0 -2px 3px rgba(120, 60, 120, 0.1), 0 3px 6px rgba(120, 60, 120, 0.12);
+  backdrop-filter: blur(var(--glass-cell-blur));
+  -webkit-backdrop-filter: blur(var(--glass-cell-blur));
+  border: 1px solid var(--glass-cell-border);
+  box-shadow: var(--glass-cell-shadow);
 }
 
 .bar.theme-glass .btn svg { stroke: var(--glass-text); }
 .bar.theme-glass .btn:hover:not(:disabled) { background: var(--glass-bg-hover); }
-.bar.theme-glass .btn:hover:not(:disabled) svg { stroke: rgba(170, 80, 160, 1); transform: scale(1.1); }
+.bar.theme-glass .btn:hover:not(:disabled) svg { stroke: var(--glass-accent); transform: scale(1.1); }
 .bar.theme-glass .btn:active:not(:disabled) { transform: scale(0.95); }
 .bar.theme-glass .btn:active:not(:disabled) svg { transform: scale(0.9); }
 
-.bar.theme-glass .badge { background: rgba(170, 80, 160, 1); color: #fff; }
-.bar.theme-glass .badge.error { background: rgba(200, 70, 100, 1); }
+.bar.theme-glass .badge { background: var(--glass-accent); color: #fff; }
+.bar.theme-glass .badge.error { background: var(--glass-danger); }
 
 .bar.theme-glass .theme-preview.glass {
-  background: rgba(170, 80, 160, 0.25);
-  border: 1px solid rgba(170, 80, 160, 0.8);
-  box-shadow: 0 0 30px rgba(170, 80, 160, 0.45), inset 0 2px 0 rgba(255, 255, 255, 0.7);
+  background: var(--glass-sel-num-bg);
+  border: 1px solid var(--glass-sel-num-border);
+  box-shadow: var(--glass-sel-num-shadow);
 }
 
 .bar.theme-glass .theme-preview.wood {
   background: var(--wood-accent-soft);
   border: 1px solid var(--wood-accent);
-  box-shadow: 0 0 15px rgba(139, 90, 43, 0.4), inset 0 2px 0 rgba(255, 255, 255, 0.4), inset 0 -2px 4px rgba(101, 67, 33, 0.15);
+  box-shadow: var(--wood-sel-num-shadow);
 }
 
 /* ========== 木质主题 ========== */
@@ -183,7 +183,7 @@ const selectValue = computed({
   background: var(--wood-cell);
   border: 1px solid var(--wood-border);
   color: var(--wood-text);
-  box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.4), inset 0 -2px 4px rgba(101, 67, 33, 0.15), 0 3px 6px rgba(101, 67, 33, 0.25);
+  box-shadow: var(--wood-cell-shadow);
 }
 
 .bar.theme-wood .select:hover { background: var(--wood-cell-hover); }
@@ -192,7 +192,7 @@ const selectValue = computed({
 .bar.theme-wood .btn {
   background: var(--wood-cell);
   border: 1px solid var(--wood-border);
-  box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.4), inset 0 -2px 4px rgba(101, 67, 33, 0.15), 0 3px 6px rgba(101, 67, 33, 0.25);
+  box-shadow: var(--wood-cell-shadow);
 }
 
 .bar.theme-wood .btn svg { stroke: var(--wood-text); }
@@ -207,13 +207,13 @@ const selectValue = computed({
 .bar.theme-wood .theme-preview.glass {
   background: var(--glass-accent-soft);
   border: 1px solid var(--glass-accent);
-  box-shadow: 0 0 15px rgba(0, 122, 255, 0.3), var(--glass-highlight);
+  box-shadow: var(--glass-sel-num-shadow);
 }
 
 .bar.theme-wood .theme-preview.wood {
   background: var(--wood-accent-soft);
   border: 1px solid var(--wood-accent);
-  box-shadow: 0 0 15px rgba(139, 90, 43, 0.4), inset 0 2px 0 rgba(255, 255, 255, 0.4), inset 0 -2px 4px rgba(101, 67, 33, 0.15);
+  box-shadow: var(--wood-sel-num-shadow);
 }
 
 @media (max-width: 768px) {

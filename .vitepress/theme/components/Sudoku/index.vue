@@ -105,7 +105,6 @@ defineExpose({ init: game.init, hint: game.hint, getStatus: () => game.status.va
         :board="game.board.value"
         :initial="game.initial.value"
         :selected="game.selected.value"
-        :locked="game.locked.value"
         :error-cell="errorCell"
         :candidates="game.candidates.value"
         :theme="theme"

@@ -21,6 +21,20 @@
   --glass-danger-soft: rgba(200, 70, 100, 0.25);
   --glass-success: rgba(100, 170, 140, 1);
 
+  /* 玻璃主题 - 组件专用变量 */
+  --glass-box-bg: rgba(210, 180, 210, 0.2);
+  --glass-box-border: rgba(190, 145, 190, 0.45);
+  --glass-cell-border: rgba(200, 155, 200, 0.55);
+  --glass-cell-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.8), inset 0 -2px 3px rgba(120, 60, 120, 0.1), 0 2px 4px rgba(120, 60, 120, 0.08);
+  --glass-cell-blur: 12px;
+  --glass-sel-num-bg: rgba(170, 80, 160, 0.25);
+  --glass-sel-num-border: rgba(170, 80, 160, 0.8);
+  --glass-sel-num-shadow: 0 0 30px rgba(170, 80, 160, 0.45), inset 0 2px 0 rgba(255, 255, 255, 0.7);
+  --glass-sel-empty-bg: rgba(200, 70, 100, 0.25);
+  --glass-sel-empty-border: rgba(200, 70, 100, 0.8);
+  --glass-sel-empty-shadow: 0 0 30px rgba(200, 70, 100, 0.45), inset 0 2px 0 rgba(255, 255, 255, 0.7);
+  --glass-error-shadow: 0 0 20px rgba(255, 59, 48, 0.5);
+
   /* 木质主题 - 复古木质 */
   --wood-bg: linear-gradient(135deg, #d4a574 0%, #c4956a 50%, #b8865e 100%);
   --wood-bg-light: linear-gradient(135deg, #e8c9a0 0%, #d4b08a 50%, #c9a078 100%);
@@ -37,6 +51,14 @@
   --wood-danger: rgba(180, 60, 30, 1);
   --wood-danger-soft: rgba(180, 60, 30, 0.15);
   --wood-success: rgba(80, 140, 60, 1);
+
+  /* 木质主题 - 组件专用变量 */
+  --wood-box-bg: rgba(101, 67, 33, 0.15);
+  --wood-box-border: rgba(139, 90, 43, 0.3);
+  --wood-cell-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.4), inset 0 -2px 4px rgba(101, 67, 33, 0.15), 0 3px 6px rgba(101, 67, 33, 0.25);
+  --wood-sel-num-shadow: 0 0 15px rgba(139, 90, 43, 0.4), inset 0 2px 0 rgba(255, 255, 255, 0.4), inset 0 -2px 4px rgba(101, 67, 33, 0.15);
+  --wood-sel-empty-shadow: 0 0 15px rgba(180, 60, 30, 0.4), inset 0 2px 0 rgba(255, 255, 255, 0.4), inset 0 -2px 4px rgba(101, 67, 33, 0.15);
+  --wood-error-shadow: 0 0 20px rgba(180, 60, 30, 0.5);
 }
 
 /* ========== 暗色模式 ========== */
@@ -57,6 +79,19 @@
   --glass-danger-soft: rgba(255, 100, 130, 0.25);
   --glass-success: rgba(120, 200, 170, 1);
 
+  /* 玻璃主题 - 暗色组件专用变量 */
+  --glass-box-bg: rgba(60, 45, 60, 0.25);
+  --glass-box-border: rgba(180, 130, 180, 0.4);
+  --glass-cell-border: rgba(190, 140, 190, 0.5);
+  --glass-cell-shadow: inset 0 2px 0 rgba(220, 150, 210, 0.25), inset 0 -2px 3px rgba(80, 30, 80, 0.15), 0 2px 4px rgba(80, 30, 80, 0.12);
+  --glass-sel-num-bg: rgba(220, 120, 200, 0.28);
+  --glass-sel-num-border: rgba(220, 120, 200, 0.85);
+  --glass-sel-num-shadow: 0 0 30px rgba(220, 120, 200, 0.5), inset 0 2px 0 rgba(220, 150, 210, 0.3);
+  --glass-sel-empty-bg: rgba(255, 100, 130, 0.28);
+  --glass-sel-empty-border: rgba(255, 100, 130, 0.85);
+  --glass-sel-empty-shadow: 0 0 30px rgba(255, 100, 130, 0.5), inset 0 2px 0 rgba(220, 150, 210, 0.3);
+  --glass-error-shadow: 0 0 20px rgba(255, 100, 130, 0.6);
+
   /* 木质主题 - 暗色木质 */
   --wood-bg: linear-gradient(135deg, #5a4a3a 0%, #4a3c2e 50%, #3a2e22 100%);
   --wood-bg-light: linear-gradient(135deg, #6a5a4a 0%, #5a4a3a 50%, #4a3c2e 100%);
@@ -73,4 +108,12 @@
   --wood-danger: rgba(200, 85, 65, 1);
   --wood-danger-soft: rgba(200, 85, 65, 0.22);
   --wood-success: rgba(85, 165, 70, 1);
+
+  /* 木质主题 - 暗色组件专用变量 */
+  --wood-box-bg: rgba(35, 25, 15, 0.3);
+  --wood-box-border: rgba(140, 100, 60, 0.35);
+  --wood-cell-shadow: inset 0 2px 0 rgba(255, 245, 230, 0.15), inset 0 -2px 4px rgba(35, 25, 15, 0.3), 0 3px 6px rgba(35, 25, 15, 0.3);
+  --wood-sel-num-shadow: 0 0 15px rgba(180, 130, 70, 0.5), inset 0 2px 0 rgba(255, 245, 230, 0.15), inset 0 -2px 4px rgba(35, 25, 15, 0.3);
+  --wood-sel-empty-shadow: 0 0 15px rgba(200, 85, 65, 0.5), inset 0 2px 0 rgba(255, 245, 230, 0.15), inset 0 -2px 4px rgba(35, 25, 15, 0.3);
+  --wood-error-shadow: 0 0 20px rgba(200, 85, 65, 0.6);
 }

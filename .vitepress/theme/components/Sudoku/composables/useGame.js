@@ -14,7 +14,6 @@ export function useGame() {
   const hints = ref(0)
   const locked = shallowRef(new Set())
   const candidates = shallowRef([])
-  const difficulty = ref('medium')
   const isCustom = ref(false)
 
   const numberCounts = computed(() => countNumbers(board.value))
@@ -39,10 +38,14 @@ export function useGame() {
     errors.value = 0
     hints.value = 0
     locked.value = new Set()
-    difficulty.value = diff
-    candidates.value = Array.from({ length: 9 }, () =>
-      Array.from({ length: 9 }, () => new Set())
-    )
+    const newCandidates = []
+    for (let i = 0; i < 9; i++) {
+      newCandidates[i] = []
+      for (let j = 0; j < 9; j++) {
+        newCandidates[i][j] = new Set()
+      }
+    }
+    candidates.value = newCandidates
   }
 
   const select = (r, c) => {
@@ -83,7 +86,9 @@ export function useGame() {
 
     if (solution.value[r][c] === n) {
       board.value[r][c] = n
-      locked.value = new Set([...locked.value, key])
+      const newLocked = new Set(locked.value)
+      newLocked.add(key)
+      locked.value = newLocked
       candidates.value[r][c].clear()
       removeCandidates(r, c, n)
       if (isComplete(board.value)) status.value = 'won'
@@ -110,7 +115,9 @@ export function useGame() {
     }
     const n = solution.value[r][c]
     board.value[r][c] = n
-    locked.value = new Set([...locked.value, r * 9 + c])
+    const newLocked = new Set(locked.value)
+    newLocked.add(r * 9 + c)
+    locked.value = newLocked
     candidates.value[r][c].clear()
     removeCandidates(r, c, n)
     hints.value++
@@ -119,8 +126,8 @@ export function useGame() {
   }
 
   return {
-    board, solution, initial, selected, status, errors, hints, locked, candidates,
-    difficulty, isCustom, numberCounts, maxErrors: MAX_ERRORS, maxHints: MAX_HINTS,
+    board, initial, selected, status, errors, hints, candidates,
+    isCustom, numberCounts, maxHints: MAX_HINTS,
     init, select, fill, hint, toggleCandidate
   }
 }

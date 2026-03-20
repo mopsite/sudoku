@@ -5,7 +5,6 @@ const props = defineProps({
   board: Array,
   initial: Array,
   selected: Object,
-  locked: Set,
   errorCell: Object,
   candidates: Array,
   theme: { type: String, default: 'glass' }
@@ -14,22 +13,24 @@ const props = defineProps({
 const emit = defineEmits(['select'])
 
 const boxes = computed(() => {
+  const { board, initial, selected, errorCell, candidates } = props
+  const selectedNum = selected && board[selected.r]?.[selected.c]
   const result = []
+  
   for (let boxRow = 0; boxRow < 3; boxRow++) {
     for (let boxCol = 0; boxCol < 3; boxCol++) {
       const cells = []
       for (let i = 0; i < 3; i++) {
         for (let j = 0; j < 3; j++) {
           const r = boxRow * 3 + i, c = boxCol * 3 + j
-          const num = props.board[r]?.[c]
-          const isSelected = props.selected?.r === r && props.selected?.c === c
-          const isInit = props.initial[r]?.[c] !== 0
-          const sameNum = props.selected && num && props.board[props.selected.r]?.[props.selected.c] === num
+          const num = board[r]?.[c]
+          const isSelected = selected?.r === r && selected?.c === c
           cells.push({
-            r, c, num, isInit,
-            isError: props.errorCell?.r === r && props.errorCell?.c === c,
-            state: isSelected ? (num ? 'sel-num' : 'sel-empty') : (sameNum ? 'sel-num' : ''),
-            candidates: props.candidates?.[r]?.[c] || new Set()
+            r, c, num,
+            isInit: initial[r]?.[c] !== 0,
+            isError: errorCell?.r === r && errorCell?.c === c,
+            state: isSelected ? (num ? 'sel-num' : 'sel-empty') : (selectedNum && num === selectedNum ? 'sel-num' : ''),
+            candidates: candidates?.[r]?.[c] || new Set()
           })
         }
       }
@@ -86,7 +87,7 @@ const boxes = computed(() => {
   justify-content: center;
   border-radius: 10px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: transform 0.15s ease, background 0.15s ease;
   min-width: 36px;
   min-height: 36px;
 }
@@ -135,28 +136,28 @@ const boxes = computed(() => {
 }
 
 .board.theme-glass .box {
-  background: rgba(210, 180, 210, 0.2);
+  background: var(--glass-box-bg);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(190, 145, 190, 0.45);
+  border: 1px solid var(--glass-box-border);
 }
 
 .board.theme-glass .cell {
   background: var(--glass-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(200, 155, 200, 0.55);
-  box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.8), inset 0 -2px 3px rgba(120, 60, 120, 0.1), 0 2px 4px rgba(120, 60, 120, 0.08);
+  backdrop-filter: blur(var(--glass-cell-blur));
+  -webkit-backdrop-filter: blur(var(--glass-cell-blur));
+  border: 1px solid var(--glass-cell-border);
+  box-shadow: var(--glass-cell-shadow);
 }
 
 .board.theme-glass .cell:hover:not(.sel-num):not(.sel-empty) { background: var(--glass-bg-hover); transform: scale(1.02); }
 .board.theme-glass .cell:active { transform: scale(0.96); }
 .board.theme-glass .num { color: var(--glass-text); }
 .board.theme-glass .c { color: var(--glass-text-soft); }
-.board.theme-glass .sel-num { background: rgba(170, 80, 160, 0.25); border-color: rgba(170, 80, 160, 0.8); box-shadow: 0 0 30px rgba(170, 80, 160, 0.45), inset 0 2px 0 rgba(255, 255, 255, 0.7); }
-.board.theme-glass .sel-empty { background: rgba(200, 70, 100, 0.25); border-color: rgba(200, 70, 100, 0.8); box-shadow: 0 0 30px rgba(200, 70, 100, 0.45), inset 0 2px 0 rgba(255, 255, 255, 0.7); }
+.board.theme-glass .sel-num { background: var(--glass-sel-num-bg); border-color: var(--glass-sel-num-border); box-shadow: var(--glass-sel-num-shadow); }
+.board.theme-glass .sel-empty { background: var(--glass-sel-empty-bg); border-color: var(--glass-sel-empty-border); box-shadow: var(--glass-sel-empty-shadow); }
 .board.theme-glass .init .num { font-weight: 700; }
-.board.theme-glass .error { box-shadow: 0 0 20px rgba(255, 59, 48, 0.5); }
+.board.theme-glass .error { box-shadow: var(--glass-error-shadow); }
 
 /* ========== 木质主题 ========== */
 .board.theme-wood {
@@ -166,24 +167,24 @@ const boxes = computed(() => {
 }
 
 .board.theme-wood .box {
-  background: rgba(101, 67, 33, 0.15);
-  border: 1px solid rgba(139, 90, 43, 0.3);
+  background: var(--wood-box-bg);
+  border: 1px solid var(--wood-box-border);
 }
 
 .board.theme-wood .cell {
   background: var(--wood-cell);
   border: 1px solid var(--wood-border);
-  box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.4), inset 0 -2px 4px rgba(101, 67, 33, 0.15), 0 3px 6px rgba(101, 67, 33, 0.25);
+  box-shadow: var(--wood-cell-shadow);
 }
 
 .board.theme-wood .cell:hover:not(.sel-num):not(.sel-empty) { background: var(--wood-cell-hover); transform: scale(1.02); }
 .board.theme-wood .cell:active { transform: scale(0.96); }
 .board.theme-wood .num { color: var(--wood-text); }
 .board.theme-wood .c { color: var(--wood-text-soft); }
-.board.theme-wood .sel-num { background: var(--wood-accent-soft); border-color: var(--wood-accent); box-shadow: 0 0 15px rgba(139, 90, 43, 0.4), inset 0 2px 0 rgba(255, 255, 255, 0.4), inset 0 -2px 4px rgba(101, 67, 33, 0.15); }
-.board.theme-wood .sel-empty { background: var(--wood-danger-soft); border-color: var(--wood-danger); box-shadow: 0 0 15px rgba(180, 60, 30, 0.4), inset 0 2px 0 rgba(255, 255, 255, 0.4), inset 0 -2px 4px rgba(101, 67, 33, 0.15); }
+.board.theme-wood .sel-num { background: var(--wood-accent-soft); border-color: var(--wood-accent); box-shadow: var(--wood-sel-num-shadow); }
+.board.theme-wood .sel-empty { background: var(--wood-danger-soft); border-color: var(--wood-danger); box-shadow: var(--wood-sel-empty-shadow); }
 .board.theme-wood .init .num { font-weight: 700; }
-.board.theme-wood .error { box-shadow: 0 0 20px rgba(180, 60, 30, 0.5); }
+.board.theme-wood .error { box-shadow: var(--wood-error-shadow); }
 
 @media (max-width: 768px) {
   .board { max-width: 98%; padding: 8px; gap: 6px; border-radius: 16px; }

@@ -1,22 +1,32 @@
 <script setup>
 import { ref } from 'vue'
 
-const props = defineProps({ counts: Object, disabled: Boolean, theme: { type: String, default: 'glass' } })
-const emit = defineEmits(['input'])
+const props = defineProps({
+  counts: Object,
+  disabled: Boolean,
+  theme: { type: String, default: 'glass' }
+})
 
+const emit = defineEmits(['input'])
 const isPencil = ref(false)
 </script>
 
 <template>
   <div class="keyboard" :class="`theme-${theme}`">
-    <button class="key toggle-btn" :class="{ active: isPencil }" :disabled @click="isPencil = !isPencil">
+    <button
+      class="key toggle-btn"
+      :class="{ active: isPencil }"
+      :disabled
+      @click="isPencil = !isPencil"
+    >
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/>
         <path d="m15 5 4 4"/>
       </svg>
     </button>
     <button
-      v-for="n in 9" :key="n"
+      v-for="n in 9"
+      :key="n"
       class="key"
       :class="{ hide: counts[n] >= 9, candidate: isPencil }"
       :disabled="disabled || counts[n] >= 9"
@@ -42,7 +52,7 @@ const isPencil = ref(false)
   font-size: clamp(18px, 4vw, 28px);
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: transform 0.15s ease, background 0.15s ease;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -54,7 +64,7 @@ const isPencil = ref(false)
 .toggle-btn svg {
   width: 60%;
   height: 60%;
-  transition: all 0.2s ease;
+  transition: transform 0.15s ease;
 }
 
 .toggle-btn:hover:not(:disabled) svg { transform: scale(1.1); }
@@ -71,18 +81,18 @@ const isPencil = ref(false)
 
 .keyboard.theme-glass .key {
   background: var(--glass-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(200, 155, 200, 0.55);
+  backdrop-filter: blur(var(--glass-cell-blur));
+  -webkit-backdrop-filter: blur(var(--glass-cell-blur));
+  border: 1px solid var(--glass-cell-border);
   color: var(--glass-text);
-  box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.8), inset 0 -2px 3px rgba(120, 60, 120, 0.1), 0 3px 6px rgba(120, 60, 120, 0.12);
+  box-shadow: var(--glass-cell-shadow);
 }
 
 .keyboard.theme-glass .key:hover:not(:disabled) { background: var(--glass-bg-hover); }
 .keyboard.theme-glass .key:active:not(:disabled) { transform: scale(0.95); }
 .keyboard.theme-glass .key.candidate { color: var(--glass-text-soft); font-weight: 400; font-size: clamp(16px, 3.5vw, 24px); }
-.keyboard.theme-glass .toggle-btn.active { background: rgba(170, 80, 160, 0.25); border-color: rgba(170, 80, 160, 0.8); }
-.keyboard.theme-glass .toggle-btn.active svg { stroke: rgba(170, 80, 160, 1); }
+.keyboard.theme-glass .toggle-btn.active { background: var(--glass-sel-num-bg); border-color: var(--glass-sel-num-border); }
+.keyboard.theme-glass .toggle-btn.active svg { stroke: var(--glass-accent); }
 
 /* ========== 木质主题 ========== */
 .keyboard.theme-wood {
@@ -95,7 +105,7 @@ const isPencil = ref(false)
   background: var(--wood-cell);
   border: 1px solid var(--wood-border);
   color: var(--wood-text);
-  box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.4), inset 0 -2px 4px rgba(101, 67, 33, 0.15), 0 3px 6px rgba(101, 67, 33, 0.25);
+  box-shadow: var(--wood-cell-shadow);
 }
 
 .keyboard.theme-wood .key:hover:not(:disabled) { background: var(--wood-cell-hover); }
