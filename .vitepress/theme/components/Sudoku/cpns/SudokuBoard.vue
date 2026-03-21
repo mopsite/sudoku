@@ -82,6 +82,7 @@ const boxes = computed(() => {
 }
 
 .cell {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -99,11 +100,11 @@ const boxes = computed(() => {
 }
 
 .cands {
+  position: absolute;
+  inset: 0;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
-  width: 100%;
-  height: 100%;
   padding: 2px;
 }
 
