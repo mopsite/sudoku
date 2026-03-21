@@ -194,7 +194,7 @@ const boxes = computed(() => {
 }
 
 @media (max-width: 480px) {
-  .board { max-width: 100%; padding: 4px; gap: 2px; border-radius: 12px; }
+  .board { max-width: 100%; gap: 2px; border-radius: 12px; }
   .box { gap: 1px; padding: 1px; border-radius: 4px; }
   .cell { min-width: 24px; min-height: 24px; border-radius: 4px; }
   .c { font-size: clamp(8px, 1.8vw, 12px); }
@@ -205,7 +205,7 @@ const boxes = computed(() => {
 }
 
 @media (max-height: 600px) {
-  .board { max-width: 400px; padding: 3px; gap: 2px; }
+  .board { max-width: 400px; gap: 2px; }
   .cell { min-width: 22px; min-height: 22px; }
 }
 </style>

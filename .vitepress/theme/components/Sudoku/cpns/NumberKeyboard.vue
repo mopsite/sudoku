@@ -128,7 +128,7 @@ const isPencil = ref(false)
 }
 
 @media (max-width: 480px) {
-  .keyboard { gap: 3px; max-width: 100%; padding: 4px; border-radius: 10px; }
+  .keyboard { gap: 3px; max-width: 100%;  border-radius: 10px; }
   .key { border-radius: 6px; }
 }
 
@@ -137,6 +137,6 @@ const isPencil = ref(false)
 }
 
 @media (max-height: 600px) {
-  .keyboard { max-width: 400px; gap: 3px; padding: 4px; }
+  .keyboard { max-width: 400px; gap: 3px;  }
 }
 </style>
