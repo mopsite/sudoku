@@ -1,8 +1,19 @@
 import { ref, computed, shallowRef } from 'vue'
 import { generatePuzzle, isComplete, countNumbers, solveSudoku } from '../utils/sudoku.js'
 
+// 常量
 const MAX_ERRORS = 3
 const MAX_HINTS = 3
+
+// 创建空的候选数数组
+const createEmptyCandidates = () => {
+  const arr = []
+  for (let i = 0; i < 9; i++) {
+    arr[i] = []
+    for (let j = 0; j < 9; j++) arr[i][j] = new Set()
+  }
+  return arr
+}
 
 export function useGame() {
   const board = ref([])
@@ -17,6 +28,36 @@ export function useGame() {
   const isCustom = ref(false)
 
   const numberCounts = computed(() => countNumbers(board.value))
+
+  // 触发候选数更新
+  const triggerUpdate = () => {
+    candidates.value = candidates.value.map(row => row.map(s => new Set(s)))
+  }
+
+  // 移除相关候选数
+  const removeCandidates = (r, c, n) => {
+    const arr = candidates.value
+    const br = (r / 3 | 0) * 3, bc = (c / 3 | 0) * 3
+    for (let i = 0; i < 9; i++) {
+      arr[r][i].delete(n)
+      arr[i][c].delete(n)
+    }
+    for (let i = br; i < br + 3; i++)
+      for (let j = bc; j < bc + 3; j++)
+        arr[i][j].delete(n)
+    triggerUpdate()
+  }
+
+  // 填入正确数字后的处理
+  const fillCorrect = (r, c, n, key) => {
+    board.value[r][c] = n
+    const newLocked = new Set(locked.value)
+    newLocked.add(key)
+    locked.value = newLocked
+    candidates.value[r][c].clear()
+    removeCandidates(r, c, n)
+    if (isComplete(board.value)) status.value = 'won'
+  }
 
   const init = (diff = 'medium', customPuzzle = null) => {
     let puzzle, sol
@@ -38,35 +79,11 @@ export function useGame() {
     errors.value = 0
     hints.value = 0
     locked.value = new Set()
-    const newCandidates = []
-    for (let i = 0; i < 9; i++) {
-      newCandidates[i] = []
-      for (let j = 0; j < 9; j++) {
-        newCandidates[i][j] = new Set()
-      }
-    }
-    candidates.value = newCandidates
+    candidates.value = createEmptyCandidates()
   }
 
   const select = (r, c) => {
     if (status.value === 'playing') selected.value = { r, c }
-  }
-
-  const triggerUpdate = () => {
-    candidates.value = candidates.value.map(row => row.map(s => new Set(s)))
-  }
-
-  const removeCandidates = (r, c, n) => {
-    const arr = candidates.value
-    for (let i = 0; i < 9; i++) {
-      arr[r][i].delete(n)
-      arr[i][c].delete(n)
-    }
-    const br = (r / 3 | 0) * 3, bc = (c / 3 | 0) * 3
-    for (let i = br; i < br + 3; i++)
-      for (let j = bc; j < bc + 3; j++)
-        arr[i][j].delete(n)
-    triggerUpdate()
   }
 
   const toggleCandidate = n => {
@@ -85,17 +102,10 @@ export function useGame() {
     if (initial.value[r][c] !== 0 || locked.value.has(key)) return false
 
     if (solution.value[r][c] === n) {
-      board.value[r][c] = n
-      const newLocked = new Set(locked.value)
-      newLocked.add(key)
-      locked.value = newLocked
-      candidates.value[r][c].clear()
-      removeCandidates(r, c, n)
-      if (isComplete(board.value)) status.value = 'won'
+      fillCorrect(r, c, n, key)
       return true
     }
-    errors.value++
-    if (errors.value >= MAX_ERRORS) status.value = 'lost'
+    if (++errors.value >= MAX_ERRORS) status.value = 'lost'
     return false
   }
 
@@ -114,14 +124,8 @@ export function useGame() {
       ;[r, c] = empty[Math.random() * empty.length | 0]
     }
     const n = solution.value[r][c]
-    board.value[r][c] = n
-    const newLocked = new Set(locked.value)
-    newLocked.add(r * 9 + c)
-    locked.value = newLocked
-    candidates.value[r][c].clear()
-    removeCandidates(r, c, n)
+    fillCorrect(r, c, n, r * 9 + c)
     hints.value++
-    if (isComplete(board.value)) status.value = 'won'
     return { r, c, n }
   }
 

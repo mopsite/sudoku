@@ -76,6 +76,7 @@ const selectValue = computed({
   transition: background 0.15s ease, border-color 0.15s ease;
   text-align: center;
   text-align-last: center;
+  min-width: 80px;
 }
 
 .btn {
@@ -217,16 +218,16 @@ const selectValue = computed({
 }
 
 @media (max-width: 768px) {
-  .bar { gap: 4px; padding: 6px; border-radius: 12px; }
-  .select { padding: 8px; font-size: 13px; border-radius: 8px; }
+  .bar { gap: 6px; padding: 6px; border-radius: 12px; }
+  .select { padding: 8px; font-size: 13px; border-radius: 8px; min-width: 70px; }
   .btn { width: 40px; height: 40px; border-radius: 8px; }
   .badge { min-width: 18px; height: 18px; font-size: 10px; }
   .theme-btn { padding: 6px; }
 }
 
 @media (max-width: 480px) {
-  .bar { gap: 3px; padding: 4px; border-radius: 10px; }
-  .select { padding: 6px; font-size: 12px; border-radius: 6px; }
+  .bar { gap: 5px; padding: 4px; border-radius: 10px; }
+  .select { padding: 6px; font-size: 12px; border-radius: 6px; min-width: 60px; }
   .btn { width: 36px; height: 36px; border-radius: 6px; }
   .btn svg { width: 20px; height: 20px; }
   .badge { min-width: 16px; height: 16px; font-size: 9px; }
@@ -234,13 +235,13 @@ const selectValue = computed({
 }
 
 @media (max-height: 700px) {
-  .bar { gap: 4px; padding: 6px; }
+  .bar { gap: 6px; padding: 6px; }
   .btn { width: 40px; height: 40px; }
 }
 
 @media (max-height: 600px) {
-  .bar { gap: 3px; padding: 4px; }
-  .select { padding: 6px; font-size: 11px; }
+  .bar { gap: 5px; padding: 4px; }
+  .select { padding: 6px; font-size: 11px; min-width: 55px; }
   .btn { width: 32px; height: 32px; }
   .btn svg { width: 18px; height: 18px; }
 }
