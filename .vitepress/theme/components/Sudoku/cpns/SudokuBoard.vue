@@ -16,7 +16,7 @@ const boxes = computed(() => {
   const { board, initial, selected, errorCell, candidates } = props
   const selectedNum = selected && board[selected.r]?.[selected.c]
   const result = []
-  
+
   for (let boxRow = 0; boxRow < 3; boxRow++) {
     for (let boxCol = 0; boxCol < 3; boxCol++) {
       const cells = []
@@ -64,8 +64,8 @@ const boxes = computed(() => {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
-  gap: 8px;
-  padding: 12px;
+  gap: 3px;
+  padding: 6px;
   border-radius: 20px;
   width: 100%;
   max-width: 540px;
@@ -76,9 +76,9 @@ const boxes = computed(() => {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
-  gap: 3px;
-  padding: 4px;
-  border-radius: 12px;
+  gap: 1px;
+  padding: 2px;
+  border-radius: 8px;
 }
 
 .cell {
@@ -188,8 +188,24 @@ const boxes = computed(() => {
 .board.theme-wood .error { box-shadow: var(--wood-error-shadow); }
 
 @media (max-width: 768px) {
-  .board { max-width: 98%; padding: 8px; gap: 6px; border-radius: 16px; }
-  .box { gap: 2px; padding: 3px; border-radius: 8px; }
+  .board { max-width: 98%; padding: 5px; gap: 3px; border-radius: 16px; }
+  .box { gap: 1px; padding: 2px; border-radius: 6px; }
   .cell { min-width: 28px; min-height: 28px; border-radius: 6px; }
+}
+
+@media (max-width: 480px) {
+  .board { max-width: 100%; padding: 4px; gap: 2px; border-radius: 12px; }
+  .box { gap: 1px; padding: 1px; border-radius: 4px; }
+  .cell { min-width: 24px; min-height: 24px; border-radius: 4px; }
+  .c { font-size: clamp(8px, 1.8vw, 12px); }
+}
+
+@media (max-height: 700px) {
+  .board { max-width: 480px; }
+}
+
+@media (max-height: 600px) {
+  .board { max-width: 400px; padding: 3px; gap: 2px; }
+  .cell { min-width: 22px; min-height: 22px; }
 }
 </style>

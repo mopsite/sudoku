@@ -12,34 +12,32 @@ const emit = defineEmits(['close'])
 </script>
 
 <template>
-  <Teleport to="body">
-    <div v-if="show" class="overlay" :class="`theme-${theme}`" @click.self="emit('close')">
-      <div class="modal">
-        <div class="icon" :class="type">
-          <svg v-if="type === 'win'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M20 6L9 17l-5-5"/>
-          </svg>
-          <svg v-else viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10"/>
-            <path d="M12 8v4"/><path d="M12 16h.01"/>
-          </svg>
-        </div>
-        <h2>{{ title }}</h2>
-        <p>{{ message }}</p>
-        <button class="btn" @click="emit('close')">{{ btnText }}</button>
+  <div v-if="show" class="overlay" :class="`theme-${theme}`">
+    <div class="modal">
+      <div class="icon" :class="type">
+        <svg v-if="type === 'win'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 6L9 17l-5-5"/>
+        </svg>
+        <svg v-else viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M12 8v4"/><path d="M12 16h.01"/>
+        </svg>
       </div>
+      <h2>{{ title }}</h2>
+      <p>{{ message }}</p>
+      <button class="btn" @click="emit('close')">{{ btnText }}</button>
     </div>
-  </Teleport>
+  </div>
 </template>
 
 <style scoped>
 .overlay {
-  position: fixed;
+  position: absolute;
   inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000;
+  z-index: 100;
   animation: fadeIn 0.3s ease;
 }
 
@@ -96,9 +94,7 @@ p {
 
 /* ========== 玻璃主题 ========== */
 .overlay.theme-glass {
-  background: rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: transparent;
 }
 
 .overlay.theme-glass .modal {
@@ -118,9 +114,7 @@ p {
 
 /* ========== 木质主题 ========== */
 .overlay.theme-wood {
-  background: rgba(60, 40, 20, 0.5);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: transparent;
 }
 
 .overlay.theme-wood .modal {

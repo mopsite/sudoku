@@ -46,7 +46,8 @@ onMounted(() => { game.init(); window.addEventListener('keydown', onKey) })
 onUnmounted(() => window.removeEventListener('keydown', onKey))
 
 watch(() => game.status.value, s => {
-  if (s === 'won' || s === 'lost') { showModal.value = true; emit(s) }
+  if (s === 'won') { showModal.value = true; emit('win') }
+  else if (s === 'lost') { showModal.value = true; emit('lose') }
 })
 
 const onModalClose = () => {
@@ -116,22 +117,22 @@ defineExpose({ init: game.init, hint: game.hint, getStatus: () => game.status.va
         :theme="theme"
         @input="fillNumber"
       />
+      <GameModal
+        :show="showModal"
+        :type="game.status.value === 'won' ? 'win' : 'lose'"
+        :title="game.status.value === 'won' ? '恭喜完成!' : '游戏结束'"
+        :message="game.status.value === 'won' ? '你成功解开了这道数独!' : '错误次数已达上限!'"
+        btn-text="继续"
+        :theme="theme"
+        @close="onModalClose"
+      />
+      <CustomModal
+        :show="showCustomModal"
+        :theme="theme"
+        @confirm="onCustomConfirm"
+        @cancel="onCustomCancel"
+      />
     </div>
-    <GameModal
-      :show="showModal"
-      :type="game.status.value === 'won' ? 'win' : 'lose'"
-      :title="game.status.value === 'won' ? '恭喜完成!' : '游戏结束'"
-      :message="game.status.value === 'won' ? '你成功解开了这道数独!' : '错误次数已达上限!'"
-      btn-text="继续"
-      :theme="theme"
-      @close="onModalClose"
-    />
-    <CustomModal
-      :show="showCustomModal"
-      :theme="theme"
-      @confirm="onCustomConfirm"
-      @cancel="onCustomCancel"
-    />
   </div>
 </template>
 
@@ -140,22 +141,38 @@ defineExpose({ init: game.init, hint: game.hint, getStatus: () => game.status.va
   width: 100%;
   display: flex;
   justify-content: center;
-  margin: 20px 0;
-  padding: 0 16px;
+  margin: 12px 0;
+  padding: 0 12px;
   box-sizing: border-box;
 }
 
 .container {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
+  gap: 10px;
   width: 100%;
-  max-width: 600px;
+  max-width: 540px;
 }
 
 @media (max-width: 768px) {
-  .sudoku-game { padding: 0 8px; }
-  .container { gap: 12px; }
+  .sudoku-game { margin: 8px 0; padding: 0 8px; }
+  .container { gap: 8px; max-width: 100%; }
+}
+
+@media (max-width: 480px) {
+  .sudoku-game { margin: 4px 0; padding: 0 4px; }
+  .container { gap: 6px; }
+}
+
+@media (max-height: 700px) {
+  .sudoku-game { margin: 4px 0; }
+  .container { gap: 6px; }
+}
+
+@media (max-height: 600px) {
+  .sudoku-game { margin: 2px 0; }
+  .container { gap: 4px; }
 }
 </style>

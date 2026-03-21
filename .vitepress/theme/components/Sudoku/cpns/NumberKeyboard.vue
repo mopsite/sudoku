@@ -19,9 +19,17 @@ const isPencil = ref(false)
       :disabled
       @click="isPencil = !isPencil"
     >
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <!-- 铅笔图标（候选数模式） -->
+      <svg v-if="isPencil" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/>
         <path d="m15 5 4 4"/>
+      </svg>
+      <!-- 钢笔图标（正常输入模式） -->
+      <svg v-else viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 19l7-7 3 3-7 7-3-3z"/>
+        <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/>
+        <path d="M2 2l7.586 7.586"/>
+        <circle cx="11" cy="11" r="2"/>
       </svg>
     </button>
     <button
@@ -41,7 +49,7 @@ const isPencil = ref(false)
   gap: 8px;
   width: 100%;
   max-width: 540px;
-  padding: 12px;
+  padding: 8px;
   border-radius: 16px;
 }
 
@@ -115,7 +123,20 @@ const isPencil = ref(false)
 .keyboard.theme-wood .toggle-btn.active svg { stroke: var(--wood-accent); }
 
 @media (max-width: 768px) {
-  .keyboard { gap: 4px; max-width: 98%; padding: 8px; border-radius: 12px; }
+  .keyboard { gap: 4px; max-width: 98%; padding: 6px; border-radius: 12px; }
   .key { border-radius: 8px; }
+}
+
+@media (max-width: 480px) {
+  .keyboard { gap: 3px; max-width: 100%; padding: 4px; border-radius: 10px; }
+  .key { border-radius: 6px; }
+}
+
+@media (max-height: 700px) {
+  .keyboard { max-width: 480px; }
+}
+
+@media (max-height: 600px) {
+  .keyboard { max-width: 400px; gap: 3px; padding: 4px; }
 }
 </style>
