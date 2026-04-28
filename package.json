@@ -1,0 +1,15 @@
+{
+  "devDependencies": {
+    "vitepress": "2.0.0-alpha.16"
+  },
+  "scripts": {
+    "dev": "vitepress dev",
+    "build": "vitepress build",
+    "preview": "vitepress preview",
+    "push": "git push && git subtree push --prefix .vitepress/dist origin gh-pages"
+  },
+  "dependencies": {
+    "pinia": "^3.0.4",
+    "sudoku": "link:"
+  }
+}
