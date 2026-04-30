@@ -115,6 +115,7 @@ const handleCancel = () => {
       padding: 12px;
       color: var(--custom-textarea-color);
       font-size: 0.85rem;
+      background: var(--custom-textarea-bg);
       border: var(--custom-textarea-border);
       border-radius: var(--custom-textarea-bdrs);
       resize: none;
@@ -139,6 +140,7 @@ const handleCancel = () => {
         background: var(--custom-btn-bg);
         border: var(--custom-btn-border);
         border-radius: var(--custom-btn-bdrs);
+        box-shadow: var(--custom-btn-shadow);
       }
     }
   }

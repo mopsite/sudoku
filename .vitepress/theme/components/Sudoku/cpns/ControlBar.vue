@@ -91,6 +91,7 @@ const formattedTime = computed(() => {
       text-align-last: center;
       font-weight: 600;
       font-variant-numeric: tabular-nums;
+      user-select: none;
     }
 
     &.disabled {

@@ -1,64 +1,62 @@
-.sudoku[data-theme='default'] {
+.sudoku {
   --max-width: clamp(0px, 98vw, 480px);
 
   --cpn-padding: clamp(2px, 1vw, 4px);
   --cpn-gap: 2px;
   --cpn-bg: none;
   --cpn-border: 2px solid;
-  --cpn-bdrs: none;
+  --cpn-bdrs: clamp(8px, 1.4vw, 16px);
   --cpn-shadow: none;
 
   --box-padding: 2px;
   --box-gap: 2px;
   --box-bg: none;
   --box-border: 1px solid;
-  --box-bdrs: none;
-  --box-shadow: none;
+  --box-bdrs: clamp(4px, 0.8vw, 8px);
 
   --cell-font-size: clamp(28px, 3.8vw, 32px);
   --cell-font-weight: 500;
   --cell-bg: none;
   --cell-border: 1px solid;
-  --cell-bdrs: none;
+  --cell-bdrs: clamp(4px, 0.9vw, 10px);
   --cell-shadow: none;
   --cell-hover-color: var(--vp-c-bg);
   --cell-hover-bg: var(--vp-c-text-1);
-  --cell-selected-border: 2px solid #ff4444;
-  --cell-highlight-border: 2px solid #00c853;
+  --cell-selected-border: 3px solid #ff4444;
+  --cell-highlight-border: 3px solid #00c853;
   --cell-transition: color 0.2s ease, background 0.2s ease;
 
   --toast-color: var(--vp-c-bg);
   --toast-bg: var(--vp-c-text-1);
-  --toast-border: none;
-  --toast-bdrs: none;
+  --toast-bdrs: 8px;
   --toast-shadow: none;
 
   --modal-color: var(--vp-c-bg);
   --modal-bg: var(--vp-c-text-1);
   --modal-border: none;
-  --modal-bdrs: none;
+  --modal-bdrs: var(--cpn-bdrs);
   --modal-shadow: none;
   --modal-btn-color: var(--vp-c-text-1);
   --modal-btn-bg: var(--vp-c-bg);
-  --modal-btn-border: none;
-  --modal-btn-bdrs: none;
+  --modal-btn-bdrs: var(--cell-bdrs);
   --modal-btn-shadow: none;
 
   --custom-color: var(--vp-c-bg);
   --custom-bg: var(--vp-c-text-1);
   --custom-border: none;
-  --custom-bdrs: none;
+  --custom-bdrs: var(--cpn-bdrs);
   --custom-shadow: none;
   --custom-title-color: var(--vp-c-bg);
   --custom-hint-color: var(--vp-c-bg);
   --custom-textarea-color: var(--vp-c-text-1);
+  --custom-textarea-bg: var(--vp-c-bg);
   --custom-textarea-border: 1px solid;
-  --custom-textarea-bdrs: none;
+  --custom-textarea-bdrs: var(--cell-bdrs);
   --custom-message-color: var(--vp-c-bg);
   --custom-btn-color: var(--vp-c-text-1);
   --custom-btn-bg: var(--vp-c-bg);
   --custom-btn-border: 1px solid;
-  --custom-btn-bdrs: none;
+  --custom-btn-bdrs: var(--cell-bdrs);
 
   svg {
     width: 60%;

@@ -27,7 +27,7 @@ const isCandidateMarked = num => {
       :key="num"
       class="btn num"
       :class="{
-        'no-border': game.mode === 'pencil' && !isCandidateMarked(num),
+        'no-style': game.mode === 'pencil' && !isCandidateMarked(num),
         marked: isCandidateMarked(num)
       }"
       :style="{
@@ -77,7 +77,9 @@ const isCandidateMarked = num => {
       }
     }
 
-    &.no-border {
+    &.no-style {
+      background: none;
+      box-shadow: none;
       border-color: transparent;
     }
 

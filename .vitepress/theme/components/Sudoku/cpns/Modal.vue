@@ -27,8 +27,10 @@ const modalInfo = computed(() => {
 <template>
   <div v-if="game.status !== 'playing'" class="overlay">
     <div class="modal">
-      <IconWin v-if="game.status === 'won'" />
-      <IconLose v-else />
+      <div class="icon" :class="game.status === 'won' ? 'won' : 'lost'">
+        <IconWin v-if="game.status === 'won'" />
+        <IconLose v-else />
+      </div>
       <h2>{{ modalInfo.title }}</h2>
       <p>{{ modalInfo.message }}</p>
       <button @click="control.handleContinue()">继续</button>
@@ -58,30 +60,52 @@ const modalInfo = computed(() => {
     border-radius: var(--modal-bdrs);
     box-shadow: var(--modal-shadow);
 
-    svg {
-      width: 48px;
-      height: 48px;
-      &:hover {
+    .icon {
+      width: 72px;
+      height: 72px;
+      margin: 0 auto 20px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &.won {
+        background: var(--icon-won-bg);
+        box-shadow: var(--icon-won-shadow);
+      }
+
+      &.lost {
+        background: var(--icon-lost-bg);
+        box-shadow: var(--icon-lost-shadow);
+      }
+
+      svg {
+        width: 36px;
+        height: 36px;
         fill: none;
+        &:hover {
+          fill: none;
+        }
       }
     }
 
     h2 {
-      margin: 10px 0;
-      font-size: 1rem;
+      margin: 0 0 10px;
+      font-size: 1.6rem;
       font-weight: 700;
     }
 
     p {
-      margin: 28px 0;
+      margin: 0 0 28px;
       font-size: 1rem;
     }
 
     button {
       padding: 14px 40px;
+      font-size: 1rem;
+      font-weight: 600;
       color: var(--modal-btn-color);
       background: var(--modal-btn-bg);
-      border: var(--modal-btn-border);
       border-radius: var(--modal-btn-bdrs);
       box-shadow: var(--modal-btn-shadow);
     }

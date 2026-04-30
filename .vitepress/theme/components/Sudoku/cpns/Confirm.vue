@@ -9,7 +9,7 @@ const confirm = useConfirm()
 <template>
   <div v-if="confirm.visible" class="overlay">
     <div class="confirm">
-      <IconLose />
+      <div class="icon lost"><IconLose /></div>
       <p>是否放弃当前游戏？</p>
 
       <div class="btn-group">
@@ -43,16 +43,32 @@ const confirm = useConfirm()
     border-radius: var(--modal-bdrs);
     box-shadow: var(--modal-shadow);
 
-    svg {
-      width: 48px;
-      height: 48px;
-      &:hover {
+    .icon {
+      width: 72px;
+      height: 72px;
+      margin: 0 auto 20px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &.lost {
+        background: var(--icon-lost-bg);
+        box-shadow: var(--icon-lost-shadow);
+      }
+
+      svg {
+        width: 36px;
+        height: 36px;
         fill: none;
+        &:hover {
+          fill: none;
+        }
       }
     }
 
     p {
-      margin: 28px 0;
+      margin: 0 0 28px;
       font-size: 1rem;
     }
 
@@ -62,6 +78,7 @@ const confirm = useConfirm()
 
       button {
         padding: 14px 40px;
+        font-size: 1rem;
         color: var(--modal-btn-color);
         background: var(--modal-btn-bg);
         border: var(--modal-btn-border);
