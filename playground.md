@@ -2,4 +2,6 @@
 layout: page
 ---
 
-<Sudoku />
+<ClientOnly>
+  <Sudoku />
+</ClientOnly>
