@@ -134,9 +134,9 @@ const handleCancel = () => {
 
       button {
         padding: 12px 32px;
-        color: var(--custom-btn-color);
         font-size: 1rem;
         font-weight: 600;
+        color: var(--custom-btn-color);
         background: var(--custom-btn-bg);
         border: var(--custom-btn-border);
         border-radius: var(--custom-btn-bdrs);

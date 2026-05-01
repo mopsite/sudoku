@@ -25,6 +25,7 @@ const toast = useToast()
   font-weight: 500;
   white-space: nowrap;
   background: var(--toast-bg);
+  border: var(--toast-border);
   border-radius: var(--toast-bdrs);
   box-shadow: var(--toast-shadow);
 }

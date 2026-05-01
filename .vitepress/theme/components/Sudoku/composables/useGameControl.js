@@ -1,4 +1,3 @@
-// composables/useGameControl.js
 import { useGame } from '../stores/useGame'
 import { useConfirm } from '../stores/useConfirm'
 import { useCustom } from '../stores/useCustom'

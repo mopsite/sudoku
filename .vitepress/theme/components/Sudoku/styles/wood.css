@@ -33,13 +33,14 @@
   --toast-bg: rgba(60, 30, 20, 0.9);
   --toast-shadow: 0 4px 12px rgba(40, 20, 15, 0.3);
 
+  --panel-color: rgb(255, 250, 245);
   --panel-bg: linear-gradient(
     145deg,
-    rgb(175, 115, 90) 0%,
-    rgb(155, 95, 70) 50%,
-    rgb(135, 80, 55) 100%
+    rgb(190, 125, 100) 0%,
+    rgb(170, 105, 80) 50%,
+    rgb(150, 90, 65) 100%
   );
-  --panel-border: 3px solid rgb(110, 60, 40);
+  --panel-border: 3px solid rgb(130, 70, 50);
   --panel-shadow:
     0 15px 35px rgba(60, 30, 20, 0.4), inset 0 2px 0 rgba(255, 255, 255, 0.15),
     inset 0 -3px 6px rgba(60, 30, 20, 0.2);
@@ -49,35 +50,10 @@
     rgb(240, 220, 205) 0%,
     rgb(225, 200, 180) 100%
   );
+  --panel-btn-border: none;
   --panel-btn-shadow:
     0 4px 12px rgba(40, 20, 15, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.5),
     inset 0 -1px 2px rgba(90, 45, 35, 0.15);
-
-  --modal-color: rgb(255, 250, 245);
-  --modal-bg: var(--panel-bg);
-  --modal-border: var(--panel-border);
-  --modal-shadow: var(--panel-shadow);
-  --modal-btn-color: var(--panel-btn-color);
-  --modal-btn-bg: var(--panel-btn-bg);
-  --modal-btn-shadow: var(--panel-btn-shadow);
-
-  --custom-color: rgb(255, 250, 245);
-  --custom-bg: var(--panel-bg);
-  --custom-border: var(--panel-shadow);
-  --custom-shadow: var(--panel-shadow);
-  --custom-title-color: rgb(255, 250, 245);
-  --custom-hint-color: rgba(255, 240, 225, 0.8);
-  --custom-textarea-color: rgb(60, 30, 20);
-  --custom-textarea-bg: linear-gradient(
-    145deg,
-    rgb(245, 225, 210) 0%,
-    rgb(235, 210, 190) 100%
-  );
-  --custom-textarea-border: 1px solid rgba(139, 69, 50, 0.5);
-  --custom-message-color: rgb(255, 250, 245);
-  --custom-btn-color: var(--panel-btn-color);
-  --custom-btn-bg: var(--panel-btn-bg);
-  --custom-btn-shadow: var(--panel-btn-shadow);
 
   --icon-won-bg: linear-gradient(
     145deg,
@@ -104,82 +80,54 @@
 .dark .sudoku[data-theme='wood'] {
   --cpn-bg: linear-gradient(
     135deg,
-    rgb(50, 33, 28) 0%,
-    rgb(42, 28, 23) 50%,
-    rgb(35, 23, 19) 100%
+    rgb(65, 42, 35) 0%,
+    rgb(56, 36, 30) 50%,
+    rgb(50, 32, 26) 100%
   );
-  --cpn-border: 3px solid rgba(80, 50, 40, 0.6);
+  --cpn-border: 3px solid rgba(110, 70, 55, 0.6);
   --cpn-shadow:
-    0 12px 32px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05),
-    inset 0 -2px 4px rgba(0, 0, 0, 0.4);
+    0 12px 32px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.5);
 
-  --box-bg: rgba(0, 0, 0, 0.15);
-  --box-border: 1px solid rgba(80, 50, 40, 0.3);
+  --box-bg: rgba(255, 220, 200, 0.1);
+  --box-border: 1px solid rgba(255, 220, 200, 0.08);
 
   --cell-bg: linear-gradient(
     145deg,
-    rgb(115, 80, 65) 0%,
-    rgb(100, 68, 55) 100%
+    rgb(125, 80, 65) 0%,
+    rgb(110, 70, 56) 100%
   );
-  --cell-border: 1px solid rgba(60, 38, 30, 0.6);
+  --cell-border: 1px solid rgba(0, 0, 0, 0.25);
   --cell-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.12),
-    inset 0 -1px 2px rgba(0, 0, 0, 0.4), 0 2px 4px rgba(0, 0, 0, 0.3);
+    inset 0 -1px 2px rgba(0, 0, 0, 0.3), 0 2px 4px rgba(0, 0, 0, 0.3);
   --cell-hover-bg: linear-gradient(
     145deg,
-    rgba(150, 110, 100, 0.95) 0%,
-    rgba(130, 95, 85, 0.95) 100%
+    rgb(150, 105, 85) 0%,
+    rgb(135, 95, 75) 100%
   );
 
-  --toast-color: rgb(240, 235, 230);
-  --toast-bg: rgba(30, 18, 14, 0.95);
+  --toast-color: rgb(235, 225, 215);
+  --toast-bg: rgba(28, 18, 14, 0.95);
   --toast-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
 
-  --panel-bg: linear-gradient(
-    145deg,
-    rgb(55, 35, 28) 0%,
-    rgb(45, 28, 22) 50%,
-    rgb(38, 24, 19) 100%
-  );
+  --panel-color: rgb(235, 225, 215);
+  --panel-bg: rgb(45, 30, 24);
   --panel-border: 1px solid rgba(255, 255, 255, 0.1);
   --panel-shadow:
-    0 15px 35px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.04),
-    inset 0 -3px 6px rgba(0, 0, 0, 0.4);
-  --panel-btn-color: rgb(45, 28, 22);
+    0 15px 35px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.5);
+
+  --panel-btn-color: rgb(45, 30, 24);
   --panel-btn-bg: linear-gradient(
     145deg,
-    rgb(230, 215, 200) 0%,
-    rgb(210, 195, 178) 100%
+    rgb(235, 215, 200) 0%,
+    rgb(215, 195, 178) 100%
   );
+  --panel-btn-border: none;
   --panel-btn-shadow:
-    0 4px 12px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    0 4px 12px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3),
     inset 0 -1px 2px rgba(0, 0, 0, 0.2);
-
-  --modal-color: rgb(240, 235, 230);
-  --modal-bg: var(--panel-bg);
-  --modal-border: var(--panel-border);
-  --modal-shadow: var(--panel-btn-shadow);
-  --modal-btn-color: var(--panel-btn-color);
-  --modal-btn-bg: var(--panel-btn-bg);
-  --modal-btn-shadow: var(--panel-btn-shadow);
-
-  --custom-color: rgb(240, 235, 230);
-  --custom-bg: var(--panel-bg);
-  --custom-border: var(--panel-border);
-  --custom-shadow: var(--panel-btn-shadow);
-  --custom-title-color: rgb(240, 235, 230);
-  --custom-hint-color: rgba(200, 185, 170, 0.8);
-  --custom-textarea-color: rgb(230, 215, 200);
-  --custom-textarea-bg: linear-gradient(
-    145deg,
-    rgb(30, 18, 14) 0%,
-    rgb(25, 15, 12) 100%
-  );
-  --custom-textarea-border: 1px solid rgba(255, 255, 255, 0.1);
-  --custom-message-color: rgb(200, 100, 80);
-  --custom-btn-color: var(--panel-btn-color);
-  --custom-btn-bg: var(--panel-btn-bg);
-  --custom-btn-shadow: var(--panel-btn-shadow);
 
   --icon-won-bg: linear-gradient(
     145deg,
@@ -197,7 +145,7 @@
   svg {
     @media (pointer: fine) {
       &:hover {
-        fill: rgb(200, 175, 155);
+        fill: rgb(180, 150, 130);
       }
     }
   }

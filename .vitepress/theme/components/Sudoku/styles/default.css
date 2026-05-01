@@ -31,32 +31,43 @@
   --toast-bdrs: 8px;
   --toast-shadow: none;
 
-  --modal-color: var(--vp-c-bg);
-  --modal-bg: var(--vp-c-text-1);
-  --modal-border: none;
-  --modal-bdrs: var(--cpn-bdrs);
-  --modal-shadow: none;
-  --modal-btn-color: var(--vp-c-text-1);
-  --modal-btn-bg: var(--vp-c-bg);
-  --modal-btn-bdrs: var(--cell-bdrs);
-  --modal-btn-shadow: none;
+  --panel-color: var(--vp-c-bg);
+  --panel-bg: var(--vp-c-text-1);
+  --panel-border: none;
+  --panel-shadow: none;
+  --panel-btn-color: var(--vp-c-text-1);
+  --panel-btn-border: none;
+  --panel-btn-bg: var(--vp-c-bg);
+  --panel-btn-shadow: none;
 
-  --custom-color: var(--vp-c-bg);
-  --custom-bg: var(--vp-c-text-1);
-  --custom-border: none;
+  --modal-color: var(--panel-color);
+  --modal-bg: var(--panel-bg);
+  --modal-border: var(--panel-border);
+  --modal-bdrs: var(--cpn-bdrs);
+  --modal-shadow: var(--panel-shadow);
+  --modal-btn-color: var(--panel-btn-color);
+  --modal-btn-bg: var(--panel-btn-bg);
+  --modal-btn-border: var(--panel-btn-border);
+  --modal-btn-bdrs: var(--cell-bdrs);
+  --modal-btn-shadow: var(--panel-btn-shadow);
+
+  --custom-color: var(--panel-color);
+  --custom-bg: var(--panel-bg);
+  --custom-border: var(--panel-border);
   --custom-bdrs: var(--cpn-bdrs);
-  --custom-shadow: none;
-  --custom-title-color: var(--vp-c-bg);
-  --custom-hint-color: var(--vp-c-bg);
-  --custom-textarea-color: var(--vp-c-text-1);
-  --custom-textarea-bg: var(--vp-c-bg);
+  --custom-shadow: var(--panel-shadow);
+  --custom-title-color: var(--panel-color);
+  --custom-hint-color: var(--panel-color);
+  --custom-textarea-color: var(--panel-btn-color);
+  --custom-textarea-bg: var(--panel-btn-bg);
   --custom-textarea-border: 1px solid;
   --custom-textarea-bdrs: var(--cell-bdrs);
-  --custom-message-color: var(--vp-c-bg);
-  --custom-btn-color: var(--vp-c-text-1);
-  --custom-btn-bg: var(--vp-c-bg);
-  --custom-btn-border: 1px solid;
+  --custom-message-color: var(--panel-color);
+  --custom-btn-color: var(--panel-btn-color);
+  --custom-btn-bg: var(--panel-btn-bg);
+  --custom-btn-border: var(--panel-btn-border);
   --custom-btn-bdrs: var(--cell-bdrs);
+  --custom-btn-shadow: var(--panel-btn-shadow);
 
   svg {
     width: 60%;

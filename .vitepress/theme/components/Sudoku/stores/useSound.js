@@ -18,40 +18,39 @@ const AUDIO_MAP = {
 let audioContext = null
 const audioBuffers = new Map()
 
-// 初始化音频（同步+立即创建，不等待事件）
-const initAudioContext = () => {
-  if (audioContext) return
-  audioContext = new (window.AudioContext || window.webkitAudioContext)()
-
-  Object.entries(AUDIO_MAP).forEach(([key, url]) => {
-    fetch(url)
-      .then(res => res.arrayBuffer())
-      .then(buf => audioContext.decodeAudioData(buf))
-      .then(buf => audioBuffers.set(key, buf))
-      .catch(() => {})
-  })
-}
-
-// 立即初始化（解决首次点击没声音）
-if (typeof window !== 'undefined') {
-  initAudioContext()
-
-  // 首次交互立即 resume（浏览器强制要求）
-  const unlockAudio = () => {
-    if (audioContext.state === 'suspended') {
-      audioContext.resume()
-    }
-    document.removeEventListener('click', unlockAudio)
-  }
-  document.addEventListener('click', unlockAudio, { once: true })
-}
-
 export const useSound = defineStore('sound', {
   state: () => ({
-    enabled: storage.get('sudoku-sound', true)
+    enabled: true
   }),
 
   actions: {
+    initPreferences() {
+      this.enabled = storage.get('sudoku-sound', true)
+      this.initAudio()
+    },
+
+    initAudio() {
+      if (typeof window === 'undefined' || audioContext) return
+
+      audioContext = new (window.AudioContext || window.webkitAudioContext)()
+
+      Object.entries(AUDIO_MAP).forEach(([key, url]) => {
+        fetch(url)
+          .then(res => res.arrayBuffer())
+          .then(buf => audioContext.decodeAudioData(buf))
+          .then(buf => audioBuffers.set(key, buf))
+          .catch(() => {})
+      })
+
+      const unlockAudio = () => {
+        if (audioContext.state === 'suspended') {
+          audioContext.resume()
+        }
+        document.removeEventListener('click', unlockAudio)
+      }
+      document.addEventListener('click', unlockAudio, { once: true })
+    },
+
     async play(key) {
       if (!this.enabled || !audioContext) return
 

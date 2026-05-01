@@ -18,19 +18,19 @@ export const useGame = defineStore('game', {
   state: () => ({
     board: createEmptyBoard(),
     solution: createEmptyBoard(),
-    level: storage.get('sudoku_level', 'easy'),
+    level: 'easy',
     previousLevel: 'easy',
     selectedCell: { row: null, col: null, value: null, isLocked: true },
     status: 'playing',
     errors: 0,
     hints: 3,
     time: 0,
-    highScores: storage.get('sudoku_high_scores', {
+    highScores: {
       easy: 0,
       medium: 0,
       hard: 0,
       custom: 0
-    }),
+    },
     mode: 'pen',
     candidates: createEmptyCandidates()
   }),
@@ -92,6 +92,15 @@ export const useGame = defineStore('game', {
   },
 
   actions: {
+    initPreferences() {
+      this.level = storage.get('sudoku_level', 'easy')
+      this.highScores = storage.get('sudoku_high_scores', {
+        easy: 0,
+        medium: 0,
+        hard: 0,
+        custom: 0
+      })
+    },
     startTimer() {
       if (timer) return
       timer = setInterval(() => {

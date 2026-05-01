@@ -1,4 +1,3 @@
-// composables/useVisibilityPause.js
 import { onMounted, onUnmounted } from 'vue'
 import { useGame } from '../stores/useGame'
 

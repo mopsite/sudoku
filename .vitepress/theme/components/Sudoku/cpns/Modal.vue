@@ -106,6 +106,7 @@ const modalInfo = computed(() => {
       font-weight: 600;
       color: var(--modal-btn-color);
       background: var(--modal-btn-bg);
+      border: var(--modal-btn-border);
       border-radius: var(--modal-btn-bdrs);
       box-shadow: var(--modal-btn-shadow);
     }

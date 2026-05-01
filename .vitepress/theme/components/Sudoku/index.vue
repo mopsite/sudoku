@@ -4,6 +4,7 @@ import { useGame } from './stores/useGame'
 import { useTheme } from './stores/useTheme'
 import { useKeyboardShortcuts } from './composables/useKeyboardShortcuts'
 import { useVisibilityPause } from './composables/useVisibilityPause'
+import { useAppInit } from './composables/useAppInit'
 
 import ControlBar from './cpns/ControlBar.vue'
 import Board from './cpns/Board.vue'
@@ -21,9 +22,12 @@ const theme = useTheme()
 useKeyboardShortcuts()
 useVisibilityPause()
 
+const { initPreferences } = useAppInit()
+
 const handleBeforeUnload = () => game.saveProgress()
 
 onMounted(() => {
+  initPreferences()
   const loaded = game.loadProgress()
   if (!loaded) game.createNewGame()
   if (typeof window !== 'undefined') {
