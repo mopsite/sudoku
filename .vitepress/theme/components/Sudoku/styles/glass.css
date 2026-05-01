@@ -1,0 +1,85 @@
+.sudoku[data-theme='glass'] {
+  --cpn-bg: rgba(235, 220, 250, 0.55);
+  --cpn-border: 1px solid rgba(180, 130, 230, 0.5);
+  --cpn-shadow:
+    0 8px 24px rgba(120, 50, 200, 0.2), inset 0 2px 0 rgba(255, 255, 255, 0.85);
+  --cpn-blur: blur(8px);
+
+  --box-bg: rgba(220, 205, 240, 0.2);
+  --box-border: 1px solid rgba(160, 110, 220, 0.4);
+
+  --cell-bg: rgba(240, 225, 250, 0.7);
+  --cell-border: 1px solid rgba(170, 120, 225, 0.45);
+  --cell-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.85), 0 2px 4px rgba(120, 50, 200, 0.1);
+  --cell-hover-bg: rgba(245, 232, 252, 0.68);
+
+  --toast-color: rgb(255, 240, 255);
+  --toast-bg: rgba(30, 15, 40, 0.9);
+  --toast-shadow: 0 4px 12px rgba(80, 40, 140, 0.3);
+
+  --panel-color: rgb(30, 15, 40);
+  --panel-bg: rgba(235, 220, 250, 0.55);
+  --panel-border: 1px solid rgba(180, 130, 230, 0.5);
+  --panel-shadow:
+    0 8px 24px rgba(120, 50, 200, 0.2), inset 0 2px 0 rgba(255, 255, 255, 0.85);
+  --panel-btn-color: rgb(80, 30, 140);
+  --panel-btn-bg: rgba(240, 225, 250, 0.6);
+  --panel-btn-shadow: 0 0 20px rgba(140, 50, 255, 0.4);
+  --panel-blur: blur(12px);
+
+  --icon-won-bg: rgb(90, 200, 180);
+  --icon-won-shadow: 0 0 30px rgba(90, 200, 180, 0.4);
+  --icon-lost-bg: rgb(220, 80, 130);
+  --icon-lost-shadow: 0 0 30px rgba(220, 80, 130, 0.4);
+
+  svg {
+    @media (pointer: fine) {
+      &:hover {
+        fill: rgb(140, 50, 255);
+      }
+    }
+  }
+}
+
+.dark .sudoku[data-theme='glass'] {
+  --cpn-bg: rgba(35, 20, 55, 0.8);
+  --cpn-border: 1px solid rgba(140, 80, 220, 0.35);
+  --cpn-shadow:
+    0 8px 24px rgba(60, 30, 100, 0.5), inset 0 2px 0 rgba(255, 255, 255, 0.35);
+
+  --box-bg: rgba(45, 30, 65, 0.4);
+  --box-border: 1px solid rgba(120, 70, 200, 0.3);
+
+  --cell-bg: rgba(50, 35, 70, 0.8);
+  --cell-border: 1px solid rgba(140, 80, 220, 0.35);
+  --cell-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.3), 0 2px 4px rgba(60, 30, 100, 0.2);
+  --cell-hover-bg: rgba(65, 45, 90, 0.85);
+
+  --toast-color: rgb(30, 15, 40);
+  --toast-bg: rgba(240, 225, 250, 0.95);
+  --toast-shadow: 0 4px 12px rgba(60, 30, 100, 0.3);
+
+  --panel-color: rgb(240, 225, 250);
+  --panel-bg: rgba(35, 20, 55, 0.8);
+  --panel-border: 1px solid rgba(140, 80, 220, 0.35);
+  --panel-shadow:
+    0 8px 24px rgba(60, 30, 100, 0.5), inset 0 2px 0 rgba(255, 255, 255, 0.35);
+  --panel-btn-color: rgb(210, 180, 240);
+  --panel-btn-bg: rgba(55, 40, 80, 0.6);
+  --panel-btn-shadow: 0 0 20px rgba(160, 70, 255, 0.35);
+
+  --icon-won-bg: rgb(80, 180, 160);
+  --icon-won-shadow: 0 0 30px rgba(80, 180, 160, 0.4);
+  --icon-lost-bg: rgb(200, 70, 110);
+  --icon-lost-shadow: 0 0 30px rgba(200, 70, 110, 0.4);
+
+  svg {
+    @media (pointer: fine) {
+      &:hover {
+        fill: rgb(160, 70, 255);
+      }
+    }
+  }
+}

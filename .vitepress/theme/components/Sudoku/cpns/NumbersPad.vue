@@ -50,6 +50,8 @@ const isCandidateMarked = num => {
   border: var(--cpn-border);
   border-radius: var(--cpn-bdrs);
   box-shadow: var(--cpn-shadow);
+  backdrop-filter: var(--cpn-blur);
+  -webkit-backdrop-filter: var(--cpn-blur);
 
   .btn {
     flex: 1;
@@ -65,15 +67,9 @@ const isCandidateMarked = num => {
     box-shadow: var(--cell-shadow);
     cursor: pointer;
 
-    &:hover:is(.num) {
-      color: var(--cell-hover-color);
-      background: var(--cell-hover-bg);
-    }
-
-    @media (pointer: coarse) {
+    @media (pointer: fine) {
       &:hover:is(.num) {
-        color: inherit;
-        background: inherit;
+        background: var(--cell-hover-bg);
       }
     }
 

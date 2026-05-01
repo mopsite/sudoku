@@ -42,6 +42,8 @@ const confirm = useConfirm()
     border: var(--modal-border);
     border-radius: var(--modal-bdrs);
     box-shadow: var(--modal-shadow);
+    backdrop-filter: var(--cpn-blur);
+    -webkit-backdrop-filter: var(--cpn-blur);
 
     .icon {
       width: 72px;
@@ -61,8 +63,10 @@ const confirm = useConfirm()
         width: 36px;
         height: 36px;
         fill: none;
-        &:hover {
-          fill: none;
+        @media (pointer: fine) {
+          &:hover {
+            fill: none;
+          }
         }
       }
     }

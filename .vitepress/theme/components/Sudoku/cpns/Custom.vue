@@ -97,6 +97,8 @@ const handleCancel = () => {
     border: var(--custom-border);
     border-radius: var(--custom-bdrs);
     box-shadow: var(--custom-shadow);
+    backdrop-filter: var(--cpn-blur);
+    -webkit-backdrop-filter: var(--cpn-blur);
 
     h2 {
       color: var(--custom-title-color);

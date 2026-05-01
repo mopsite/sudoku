@@ -70,6 +70,8 @@ const formattedTime = computed(() => {
   border: var(--cpn-border);
   border-radius: var(--cpn-bdrs);
   box-shadow: var(--cpn-shadow);
+  backdrop-filter: var(--cpn-blur);
+  -webkit-backdrop-filter: var(--cpn-blur);
 
   .btn {
     flex: 1;
@@ -97,6 +99,12 @@ const formattedTime = computed(() => {
     &.disabled {
       opacity: 0.5;
       cursor: not-allowed;
+    }
+
+    @media (pointer: fine) {
+      &:hover {
+        background: var(--cell-hover-bg);
+      }
     }
   }
 }

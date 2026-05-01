@@ -7,6 +7,7 @@
   --cpn-border: 2px solid;
   --cpn-bdrs: clamp(8px, 1.4vw, 16px);
   --cpn-shadow: none;
+  --cpn-blur: none;
 
   --box-padding: 2px;
   --box-gap: 2px;
@@ -20,8 +21,7 @@
   --cell-border: 1px solid;
   --cell-bdrs: clamp(4px, 0.9vw, 10px);
   --cell-shadow: none;
-  --cell-hover-color: var(--vp-c-bg);
-  --cell-hover-bg: var(--vp-c-text-1);
+  --cell-hover-bg: none;
   --cell-selected-border: 3px solid #ff4444;
   --cell-highlight-border: 3px solid #00c853;
   --cell-transition: color 0.2s ease, background 0.2s ease;
@@ -36,9 +36,10 @@
   --panel-border: none;
   --panel-shadow: none;
   --panel-btn-color: var(--vp-c-text-1);
-  --panel-btn-border: none;
+  --panel-btn-border: var(--cell-border);
   --panel-btn-bg: var(--vp-c-bg);
   --panel-btn-shadow: none;
+  --panel-blur: none;
 
   --modal-color: var(--panel-color);
   --modal-bg: var(--panel-bg);

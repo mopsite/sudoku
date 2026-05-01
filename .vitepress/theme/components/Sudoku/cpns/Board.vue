@@ -56,6 +56,8 @@ const isCandidateActive = (cell, num) => cell.candidates.includes(num)
   border: var(--cpn-border);
   border-radius: var(--cpn-bdrs);
   box-shadow: var(--cpn-shadow);
+  backdrop-filter: var(--cpn-blur);
+  -webkit-backdrop-filter: var(--cpn-blur);
 
   .box {
     padding: var(--box-padding);
@@ -84,7 +86,6 @@ const isCandidateActive = (cell, num) => cell.candidates.includes(num)
 
       @media (pointer: fine) {
         &:hover {
-          color: var(--cell-hover-color);
           background: var(--cell-hover-bg);
         }
       }

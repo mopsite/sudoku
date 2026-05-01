@@ -1,9 +1,9 @@
 .sudoku[data-theme='wood'] {
   --cpn-bg: linear-gradient(
     135deg,
-    rgba(210, 140, 115) 0%,
-    rgba(195, 125, 100) 50%,
-    rgba(180, 110, 85) 100%
+    rgb(210, 140, 115) 0%,
+    rgb(195, 125, 100) 50%,
+    rgb(180, 110, 85) 100%
   );
   --cpn-border: 3px solid rgba(139, 69, 50, 0.7);
   --cpn-shadow:
@@ -22,7 +22,6 @@
   --cell-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.35),
     inset 0 -1px 3px rgba(90, 45, 35, 0.15), 0 2px 4px rgba(90, 45, 35, 0.2);
-  --cell-hover-color: var(--vp-c-text-1);
   --cell-hover-bg: linear-gradient(
     145deg,
     rgba(235, 200, 185, 0.95) 0%,
@@ -50,7 +49,6 @@
     rgb(240, 220, 205) 0%,
     rgb(225, 200, 180) 100%
   );
-  --panel-btn-border: none;
   --panel-btn-shadow:
     0 4px 12px rgba(40, 20, 15, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.5),
     inset 0 -1px 2px rgba(90, 45, 35, 0.15);
@@ -124,7 +122,6 @@
     rgb(235, 215, 200) 0%,
     rgb(215, 195, 178) 100%
   );
-  --panel-btn-border: none;
   --panel-btn-shadow:
     0 4px 12px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3),
     inset 0 -1px 2px rgba(0, 0, 0, 0.2);
