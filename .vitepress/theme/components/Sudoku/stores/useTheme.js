@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { storage } from '../scripts'
 
-const THEMES = ['default', 'wood', 'glass']
+const THEMES = ['default', 'wood', 'glass', 'neumorphism']
 const STORAGE_KEY = 'sudoku_theme'
 
 export const useTheme = defineStore('theme', {

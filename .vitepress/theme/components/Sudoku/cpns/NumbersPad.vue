@@ -70,6 +70,7 @@ const isCandidateMarked = num => {
     @media (pointer: fine) {
       &:hover:is(.num) {
         background: var(--cell-hover-bg);
+        box-shadow: var(--cell-hover-shadow);
       }
     }
 

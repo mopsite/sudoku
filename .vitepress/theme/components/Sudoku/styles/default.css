@@ -22,9 +22,16 @@
   --cell-bdrs: clamp(4px, 0.9vw, 10px);
   --cell-shadow: none;
   --cell-hover-bg: none;
+  --cell-hover-shadow: none;
+  --cell-selected-color: none;
   --cell-selected-border: 3px solid #ff4444;
+  --cell-selected-bg: none;
+  --cell-selected-shadow: none;
+  --cell-highlight-color: none;
   --cell-highlight-border: 3px solid #00c853;
-  --cell-transition: color 0.2s ease, background 0.2s ease;
+  --cell-highlight-bg: none;
+  --cell-highlight-shadow: none;
+  --cell-transition: all 0.2s ease;
 
   --toast-color: var(--vp-c-bg);
   --toast-bg: var(--vp-c-text-1);
@@ -63,6 +70,7 @@
   --custom-textarea-bg: var(--panel-btn-bg);
   --custom-textarea-border: 1px solid;
   --custom-textarea-bdrs: var(--cell-bdrs);
+  --custom-textarea-shadow: none;
   --custom-message-color: var(--panel-color);
   --custom-btn-color: var(--panel-btn-color);
   --custom-btn-bg: var(--panel-btn-bg);

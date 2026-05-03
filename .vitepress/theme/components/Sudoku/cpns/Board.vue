@@ -87,15 +87,20 @@ const isCandidateActive = (cell, num) => cell.candidates.includes(num)
       @media (pointer: fine) {
         &:hover {
           background: var(--cell-hover-bg);
+          box-shadow: var(--cell-hover-shadow);
         }
       }
 
       &.selected {
         border: var(--cell-selected-border);
+        background: var(--cell-selected-bg);
+        box-shadow: var(--cell-selected-shadow);
       }
 
       &.highlight {
         border: var(--cell-highlight-border);
+        background: var(--cell-highlight-bg);
+        box-shadow: var(--cell-highlight-shadow);
       }
 
       .candidates {

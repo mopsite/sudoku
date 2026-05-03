@@ -120,6 +120,7 @@ const handleCancel = () => {
       background: var(--custom-textarea-bg);
       border: var(--custom-textarea-border);
       border-radius: var(--custom-textarea-bdrs);
+      box-shadow: var(--custom-textarea-shadow);
       resize: none;
     }
 
